@@ -863,14 +863,26 @@
   <script>
     // === ВИБРАЦИЯ ПРИ НАЖАТИИ (Haptic Feedback) ===
     function vibrate() {
-      if (navigator.vibrate) {
-        navigator.vibrate(15); // Короткая вибрация 15 мс
+      try {
+        if (navigator.vibrate) {
+          navigator.vibrate(15);
+        }
+      } catch (e) {
+        // Игнорируем ошибки
       }
     }
 
-    // Навешиваем вибрацию на все кнопки
+    // Навешиваем вибрацию на все кнопки при касании (touchstart лучше работает на мобильных)
     document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('click', vibrate);
+      // Для мобильных устройств
+      btn.addEventListener('touchstart', (e) => {
+        vibrate();
+      }, { passive: true });
+
+      // Для ПК / планшетов с мышью
+      btn.addEventListener('mousedown', () => {
+        vibrate();
+      });
     });
 
     // === РЕГИСТРАЦИЯ SERVICE WORKER ===
