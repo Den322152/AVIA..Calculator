@@ -11,7 +11,6 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a2a43'/%3E%3Crect x='0' y='0' width='100' height='14' fill='%23c8102e'/%3E%3Ctext x='50' y='52' font-family='Arial, sans-serif' font-size='24' font-weight='900' fill='%23ffffff' text-anchor='middle' letter-spacing='0'%3EAVIA%3C/text%3E%3Ctext x='50' y='75' font-family='Arial, sans-serif' font-size='12' font-weight='700' fill='%2393c5fd' text-anchor='middle' letter-spacing='0'%3ECALCULATOR%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a2a43'/%3E%3Crect x='0' y='0' width='100' height='14' fill='%23c8102e'/%3E%3Ctext x='50' y='52' font-family='Arial, sans-serif' font-size='24' font-weight='900' fill='%23ffffff' text-anchor='middle' letter-spacing='0'%3EAVIA%3C/text%3E%3Ctext x='50' y='75' font-family='Arial, sans-serif' font-size='12' font-weight='700' fill='%2393c5fd' text-anchor='middle' letter-spacing='0'%3ECALCULATOR%3C/text%3E%3C/svg%3E">
   
-  <!-- Подключаем Manifest (создаем его в папке) -->
   <link rel="manifest" href="manifest.json">
 
   <style>
@@ -862,6 +861,18 @@
 
   <!-- Скрипты -->
   <script>
+    // === ВИБРАЦИЯ ПРИ НАЖАТИИ (Haptic Feedback) ===
+    function vibrate() {
+      if (navigator.vibrate) {
+        navigator.vibrate(15); // Короткая вибрация 15 мс
+      }
+    }
+
+    // Навешиваем вибрацию на все кнопки
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', vibrate);
+    });
+
     // === РЕГИСТРАЦИЯ SERVICE WORKER ===
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
