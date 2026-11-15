@@ -1,7 +1,8 @@
-const CACHE_NAME = 'avia-calc-v1';
+const CACHE_NAME = 'avia-calc-v2'; // МЕНЯЙТЕ ВЕРСИЮ при каждом обновлении!
 const ASSETS = [
   './',
-  './index.html'
+  './index.html',
+  './manifest.json'
 ];
 
 // Установка: кэшируем основные файлы
@@ -14,7 +15,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Активация: удаляем старые кэши, если версия изменилась
+// Активация: удаляем старые кэши
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -29,9 +30,15 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Слушаем сообщение от страницы (кнопка "Обновить")
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
+});
+
 // Перехват запросов: если нет сети, отдаем из кэша
 self.addEventListener('fetch', (event) => {
-  // Мы кэшируем только GET запросы
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
@@ -40,7 +47,6 @@ self.addEventListener('fetch', (event) => {
         return cachedResponse;
       }
       return fetch(event.request).catch(() => {
-        // Если сети нет и файла нет в кэше, возвращаем главную страницу
         return caches.match('./index.html');
       });
     })
