@@ -1,13 +1,13 @@
-const CACHE_NAME = 'avia-calc-v2'; // МЕНЯЙТЕ ВЕРСИЮ при каждом обновлении!
+const CACHE_NAME = 'avia-calc-v2'; // Версия кэша. МЕНЯЙТЕ при каждом обновлении!
 const ASSETS = [
   './',
   './index.html',
   './manifest.json'
 ];
 
-// Установка: кэшируем основные файлы
+// Установка: кэшируем основные файлы и активируемся сразу
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
+  self.skipWaiting(); // Активируемся немедленно
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
