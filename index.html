@@ -504,6 +504,38 @@
       background: #0a3d1f;
     }
 
+    /* === ФУТЕР С ТОЧКАМИ === */
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 0 8px;
+      margin-top: auto; /* Прижимает к низу */
+      opacity: 0.3; /* Еле заметный */
+      transition: opacity 0.2s;
+    }
+    .footer:hover {
+      opacity: 1;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #475569;
+      transition: background 0.3s;
+    }
+    .dot.active {
+      background: #22c55e; /* Зеленая точка, если версия совпала */
+      box-shadow: 0 0 4px #22c55e;
+    }
+    .version-text {
+      font-size: 9px;
+      color: #475569;
+      letter-spacing: 1px;
+      margin-left: 4px;
+    }
+
     /* === АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ === */
     @media (min-width: 768px) {
       .app {
@@ -880,6 +912,13 @@
       <button type="button" class="reset-btn" onclick="resetTemp()">Сброс</button>
     </div>
 
+    <!-- ==================== ФУТЕР (Версия) ==================== -->
+    <div class="footer">
+      <div class="dot active" title="Загружено"></div>
+      <div class="dot active" title="Версия 2"></div>
+      <span class="version-text">v2.0</span>
+    </div>
+
   </div>
 
   <script>
@@ -889,14 +928,12 @@
     let newWorker;
     const updateBtn = document.getElementById('updateBtn');
 
-    // Активируем новый SW (пропускаем ожидание)
     function activateUpdate() {
       if (newWorker) {
         newWorker.postMessage({ action: 'skipWaiting' });
       }
     }
 
-    // По клику на кнопку — активируем и перезагружаем страницу
     if (updateBtn) {
       updateBtn.addEventListener('click', () => {
         activateUpdate();
@@ -907,21 +944,20 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').then(reg => {
-          // Если новый SW уже ждет (например, после предыдущего обновления)
+          // Принудительно проверяем обновления при каждом запуске
+          reg.update();
+
           if (reg.waiting) {
             newWorker = reg.waiting;
             if (updateBtn) updateBtn.style.display = 'block';
             return;
           }
 
-          // Слушаем событие обновления
           reg.addEventListener('updatefound', () => {
             const installingWorker = reg.installing;
-            
             installingWorker.addEventListener('statechange', () => {
               if (installingWorker.state === 'installed') {
                 if (navigator.serviceWorker.controller) {
-                  // Новая версия установлена, показываем кнопку
                   newWorker = installingWorker;
                   if (updateBtn) updateBtn.style.display = 'block';
                 }
