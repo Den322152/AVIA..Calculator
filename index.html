@@ -867,34 +867,20 @@
         if (navigator.vibrate) {
           navigator.vibrate(15);
         }
-      } catch (e) {
-        // Игнорируем ошибки
-      }
+      } catch (e) {}
     }
 
-    // Навешиваем вибрацию на все кнопки при касании (touchstart лучше работает на мобильных)
     document.querySelectorAll('button').forEach(btn => {
-      // Для мобильных устройств
-      btn.addEventListener('touchstart', (e) => {
-        vibrate();
-      }, { passive: true });
-
-      // Для ПК / планшетов с мышью
-      btn.addEventListener('mousedown', () => {
-        vibrate();
-      });
+      btn.addEventListener('touchstart', (e) => vibrate(), { passive: true });
+      btn.addEventListener('mousedown', () => vibrate());
     });
 
     // === РЕГИСТРАЦИЯ SERVICE WORKER ===
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then(registration => {
-            console.log('Service Worker зарегистрирован успешно');
-          })
-          .catch(error => {
-            console.error('Ошибка регистрации Service Worker:', error);
-          });
+          .then(registration => console.log('SW registered'))
+          .catch(error => console.error('SW error:', error));
       });
     }
 
@@ -975,10 +961,21 @@
       [fieldFuelUsed, fieldBefore, fieldAddedLt, fieldDensity, fieldAddedKg, fieldIndicated].forEach(f => f.classList.remove('field-green-active', 'field-blue-active'));
 
       if (!allFilled) { fuelUsedInput.value = ''; beforeInput.value = ''; return; }
-      const fuelUsed = Math.abs(rnd(indicated - (addedKg + remaining)));
-      const before = rnd(remaining - fuelUsed);
-      fuelUsedInput.value = String(fuelUsed);
-      beforeInput.value = String(before);
+      
+      // Разница между фактическим (Indicated) и расчетным (Added + Remaining)
+      // Если Indicated > расчетного, то разница положительная (лишнее топливо)
+      const diff = rnd(indicated - (addedKg + remaining));
+      const fuelUsed = Math.abs(diff);
+      
+      if (diff > 0) {
+        // Топлива больше, чем нужно. Списание не требуется.
+        fuelUsedInput.value = `Не требуется (+${diff} kg)`;
+        beforeInput.value = String(remaining);
+      } else {
+        // Топлива меньше или ровно. Стандартный расчет.
+        fuelUsedInput.value = String(fuelUsed);
+        beforeInput.value = String(rnd(remaining - fuelUsed));
+      }
       
       fieldFuelUsed.classList.add('field-green-active');
       [fieldBefore, fieldAddedLt, fieldDensity, fieldAddedKg, fieldIndicated].forEach(f => f.classList.add('field-blue-active'));
@@ -1031,10 +1028,17 @@
       [fieldFuelUsed2, fieldBefore2, fieldAddedLt2, fieldDensity2, fieldAddedLt2b, fieldDensity2b, fieldAddedKg2, fieldIndicated2].forEach(f => f.classList.remove('field-green-active', 'field-blue-active'));
 
       if (!allFilled) { fuelUsedInput2.value = ''; beforeInput2.value = ''; return; }
-      const fuelUsed = Math.abs(rnd(indicated - (addedKg + remaining)));
-      const before = rnd(remaining - fuelUsed);
-      fuelUsedInput2.value = String(fuelUsed);
-      beforeInput2.value = String(before);
+      
+      const diff = rnd(indicated - (addedKg + remaining));
+      const fuelUsed = Math.abs(diff);
+      
+      if (diff > 0) {
+        fuelUsedInput2.value = `Не требуется (+${diff} kg)`;
+        beforeInput2.value = String(remaining);
+      } else {
+        fuelUsedInput2.value = String(fuelUsed);
+        beforeInput2.value = String(rnd(remaining - fuelUsed));
+      }
       
       fieldFuelUsed2.classList.add('field-green-active');
       [fieldBefore2, fieldAddedLt2, fieldDensity2, fieldAddedLt2b, fieldDensity2b, fieldAddedKg2, fieldIndicated2].forEach(f => f.classList.add('field-blue-active'));
@@ -1049,7 +1053,7 @@
     [remainingFuelInput2, addedLtInput2, addedLtInput2b, indicatedTotalInput2].forEach(input => input.addEventListener('input', calculateDouble));
 
     // Wind
-    let windMode = 'landing'; // 'landing' or 'takeoff'
+    let windMode = 'landing';
     
     function setWindMode(mode) {
       windMode = mode;
@@ -1060,7 +1064,6 @@
 
     const KT_TO_MS = 0.514444, LIMIT_TAILWIND_KT = 10;
     
-    // Таблица для посадки (Landing)
     const TABLE_LANDING = [
       { code: 6, action: "—", muMin: 0.62, muMax: 9.99, limitKt: 40, limitMs: 20.5 },
       { code: 5, action: "Good", muMin: 0.40, muMax: 0.61, limitKt: 40, limitMs: 20.5 },
@@ -1071,9 +1074,8 @@
       { code: 0, action: "Nil", muMin: -1, muMax: 0.169, limitKt: 0, limitMs: 0 }
     ];
 
-    // Таблица для взлета (Take off)
     const TABLE_TAKEOFF = [
-      { code: 6, action: "—", muMin: 0.62, muMax: 9.99, limitKt: 20.5, limitMs: 12.8 }, // На скриншоте для 6 нет данных, берем как для 5
+      { code: 6, action: "—", muMin: 0.62, muMax: 9.99, limitKt: 20.5, limitMs: 12.8 },
       { code: 5, action: "Good", muMin: 0.40, muMax: 0.61, limitKt: 25, limitMs: 12.8 },
       { code: 4, action: "Good to Medium", muMin: 0.36, muMax: 0.39, limitKt: 20, limitMs: 10.2 },
       { code: 3, action: "Medium", muMin: 0.30, muMax: 0.35, limitKt: 17, limitMs: 8.7 },
