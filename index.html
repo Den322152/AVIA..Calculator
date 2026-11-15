@@ -963,9 +963,7 @@
       if (!allFilled) { fuelUsedInput.value = ''; beforeInput.value = ''; return; }
       
       // Разница между фактическим (Indicated) и расчетным (Added + Remaining)
-      // Если Indicated > расчетного, то разница положительная (лишнее топливо)
       const diff = rnd(indicated - (addedKg + remaining));
-      const fuelUsed = Math.abs(diff);
       
       if (diff > 0) {
         // Топлива больше, чем нужно. Списание не требуется.
@@ -973,6 +971,7 @@
         beforeInput.value = String(remaining);
       } else {
         // Топлива меньше или ровно. Стандартный расчет.
+        const fuelUsed = Math.abs(diff);
         fuelUsedInput.value = String(fuelUsed);
         beforeInput.value = String(rnd(remaining - fuelUsed));
       }
@@ -1030,12 +1029,12 @@
       if (!allFilled) { fuelUsedInput2.value = ''; beforeInput2.value = ''; return; }
       
       const diff = rnd(indicated - (addedKg + remaining));
-      const fuelUsed = Math.abs(diff);
       
       if (diff > 0) {
         fuelUsedInput2.value = `Не требуется (+${diff} kg)`;
         beforeInput2.value = String(remaining);
       } else {
+        const fuelUsed = Math.abs(diff);
         fuelUsedInput2.value = String(fuelUsed);
         beforeInput2.value = String(rnd(remaining - fuelUsed));
       }
