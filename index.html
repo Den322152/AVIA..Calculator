@@ -135,6 +135,23 @@
       text-align: center;
     }
 
+    /* Кнопка обновления */
+    #updateBtn {
+      display: none;
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #f59e0b;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.5);
+    }
+    #updateBtn:active { transform: scale(0.98); }
+
     /* === Главные вкладки === */
     .main-tabs {
       display: flex;
@@ -566,6 +583,12 @@
 </head>
 <body>
   <div class="app" id="appContainer">
+    
+    <!-- Кнопка обновления (появляется только при наличии новой версии) -->
+    <button id="updateBtn">
+      🔄 Доступно обновление! Нажмите, чтобы перезагрузить
+    </button>
+
     <div class="header">
       <div class="title-badge">
         <div class="title-main">AVIA <span class="accent">CALCULATOR</span></div>
@@ -859,9 +882,61 @@
 
   </div>
 
-  <!-- Скрипты -->
   <script>
-    // === ВИБРАЦИЯ ПРИ НАЖАТИИ (Haptic Feedback) ===
+    // ============================================
+    // 1. ЛОГИКА ОБНОВЛЕНИЯ ПРИЛОЖЕНИЯ (SW)
+    // ============================================
+    let newWorker;
+    const updateBtn = document.getElementById('updateBtn');
+
+    // Активируем новый SW (пропускаем ожидание)
+    function activateUpdate() {
+      if (newWorker) {
+        newWorker.postMessage({ action: 'skipWaiting' });
+      }
+    }
+
+    // По клику на кнопку — активируем и перезагружаем страницу
+    if (updateBtn) {
+      updateBtn.addEventListener('click', () => {
+        activateUpdate();
+        window.location.reload();
+      });
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          // Если новый SW уже ждет (например, после предыдущего обновления)
+          if (reg.waiting) {
+            newWorker = reg.waiting;
+            if (updateBtn) updateBtn.style.display = 'block';
+            return;
+          }
+
+          // Слушаем событие обновления
+          reg.addEventListener('updatefound', () => {
+            const installingWorker = reg.installing;
+            
+            installingWorker.addEventListener('statechange', () => {
+              if (installingWorker.state === 'installed') {
+                if (navigator.serviceWorker.controller) {
+                  // Новая версия установлена, показываем кнопку
+                  newWorker = installingWorker;
+                  if (updateBtn) updateBtn.style.display = 'block';
+                }
+              }
+            });
+          });
+        }).catch(err => {
+          console.error('Ошибка регистрации SW:', err);
+        });
+      });
+    }
+
+    // ============================================
+    // 2. ВИБРАЦИЯ ПРИ НАЖАТИИ (Haptic Feedback)
+    // ============================================
     function vibrate() {
       try {
         if (navigator.vibrate) {
@@ -875,17 +950,9 @@
       btn.addEventListener('mousedown', () => vibrate());
     });
 
-    // === РЕГИСТРАЦИЯ SERVICE WORKER ===
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(registration => console.log('SW registered'))
-          .catch(error => console.error('SW error:', error));
-      });
-    }
-
-    // === ОСНОВНАЯ ЛОГИКА ===
-
+    // ============================================
+    // 3. ОСНОВНАЯ ЛОГИКА ПРИЛОЖЕНИЯ
+    // ============================================
     function switchMainTab(tabId, btnElement) {
       document.querySelectorAll('.main-tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.main-tab-btn').forEach(el => el.classList.remove('active'));
