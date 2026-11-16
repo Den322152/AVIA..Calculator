@@ -515,9 +515,7 @@
       opacity: 0.3; /* Еле заметный */
       transition: opacity 0.2s;
     }
-    .footer:hover {
-      opacity: 1;
-    }
+    .footer:hover { opacity: 1; }
     .dot {
       width: 6px;
       height: 6px;
@@ -526,7 +524,7 @@
       transition: background 0.3s;
     }
     .dot.active {
-      background: #22c55e; /* Зеленая точка, если версия совпала */
+      background: #22c55e;
       box-shadow: 0 0 4px #22c55e;
     }
     .version-text {
@@ -534,6 +532,17 @@
       color: #475569;
       letter-spacing: 1px;
       margin-left: 4px;
+    }
+
+    /* === Дата ревизии (надпись над AIRCRAFT REG) === */
+    .date-hint {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #475569; /* Еле заметный цвет */
+      letter-spacing: 0.5px;
+      margin-bottom: -4px; /* Чуть ближе к полю */
+      margin-top: 4px;
+      opacity: 0.8;
     }
 
     /* === АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ === */
@@ -734,6 +743,10 @@
 
     <!-- ==================== DOW/DOI ==================== -->
     <div id="main-dow" class="main-tab-content">
+      
+      <!-- Еле заметная надпись с датой ревизии -->
+      <div class="date-hint">Date of revision: 05-Jun-2026</div>
+
       <div class="input-grid">
         <div class="field">
           <label for="dowReg">Aircraft Reg</label>
