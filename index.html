@@ -234,6 +234,7 @@
       scroll-margin-top: 20px;
     }
     .field label {
+      position: relative;
       font-size: clamp(0.7rem, 2vw, 0.78rem);
       font-weight: 600;
       letter-spacing: 0.6px;
@@ -511,8 +512,8 @@
       align-items: center;
       gap: 8px;
       padding: 16px 0 8px;
-      margin-top: auto; /* Прижимает к низу */
-      opacity: 0.3; /* Еле заметный */
+      margin-top: auto;
+      opacity: 0.3;
       transition: opacity 0.2s;
     }
     .footer:hover { opacity: 1; }
@@ -534,16 +535,21 @@
       margin-left: 4px;
     }
 
-    /* === Дата ревизии (ненавязчивая, над результатами DOW) === */
+    /* === Дата ревизии (в строке с заголовком DOW, по центру) === */
     .date-hint {
-      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-size: 0.6rem;
-      color: #475569;
+      color: #c8102e;
       letter-spacing: 0.5px;
-      margin: 0;
-      opacity: 0.7;
-      grid-column: 1 / -1;
+      opacity: 0.85;
       line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      text-transform: none;
+      font-weight: 600;
     }
 
     /* === АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ === */
@@ -772,11 +778,8 @@
           <input type="number" id="dowFlyaway" min="0" inputmode="decimal" placeholder="250 kg included" oninput="calculateDow()">
         </div>
 
-        <!-- Дата ревизии: ненавязчивая, над результатами DOW -->
-        <div class="date-hint">Date of revision: 05-Jun-2026</div>
-
         <div class="field field-green" id="dowFieldDow">
-          <label for="dowVal">DOW (Kg)</label>
+          <label for="dowVal">DOW (Kg)<span class="date-hint">Date of revision: 05-Jun-2026</span></label>
           <input type="text" id="dowVal" readonly placeholder="" tabindex="-1">
         </div>
 
@@ -958,7 +961,6 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').then(reg => {
-          // Принудительно проверяем обновления при каждом запуске
           reg.update();
 
           if (reg.waiting) {
@@ -1079,15 +1081,12 @@
 
       if (!allFilled) { fuelUsedInput.value = ''; beforeInput.value = ''; return; }
       
-      // Разница между фактическим (Indicated) и расчетным (Added + Remaining)
       const diff = rnd(indicated - (addedKg + remaining));
       
       if (diff > 0) {
-        // Топлива больше, чем нужно. Списание не требуется.
         fuelUsedInput.value = `Не требуется (+${diff} kg)`;
         beforeInput.value = String(remaining);
       } else {
-        // Топлива меньше или ровно. Стандартный расчет.
         const fuelUsed = Math.abs(diff);
         fuelUsedInput.value = String(fuelUsed);
         beforeInput.value = String(rnd(remaining - fuelUsed));
