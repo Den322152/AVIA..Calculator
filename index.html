@@ -534,15 +534,16 @@
       margin-left: 4px;
     }
 
-    /* === Дата ревизии (надпись над AIRCRAFT REG) === */
+    /* === Дата ревизии (ненавязчивая, над результатами DOW) === */
     .date-hint {
       text-align: center;
-      font-size: 0.65rem;
-      color: #475569; /* Еле заметный цвет */
+      font-size: 0.6rem;
+      color: #475569;
       letter-spacing: 0.5px;
-      margin-bottom: -4px; /* Чуть ближе к полю */
-      margin-top: 4px;
-      opacity: 0.8;
+      margin: 0;
+      opacity: 0.7;
+      grid-column: 1 / -1;
+      line-height: 1;
     }
 
     /* === АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ === */
@@ -743,9 +744,6 @@
 
     <!-- ==================== DOW/DOI ==================== -->
     <div id="main-dow" class="main-tab-content">
-      
-      <!-- Еле заметная надпись с датой ревизии -->
-      <div class="date-hint">Date of revision: 05-Jun-2026</div>
 
       <div class="input-grid">
         <div class="field">
@@ -773,6 +771,9 @@
           <label for="dowFlyaway">Fly-away Kit (Fact kg)</label>
           <input type="number" id="dowFlyaway" min="0" inputmode="decimal" placeholder="250 kg included" oninput="calculateDow()">
         </div>
+
+        <!-- Дата ревизии: ненавязчивая, над результатами DOW -->
+        <div class="date-hint">Date of revision: 05-Jun-2026</div>
 
         <div class="field field-green" id="dowFieldDow">
           <label for="dowVal">DOW (Kg)</label>
