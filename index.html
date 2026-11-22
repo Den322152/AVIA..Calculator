@@ -2709,17 +2709,17 @@ function onOatInput() {
   calculate();
 }
 
-/* CLEAR NUMBER INPUT ON FIRST TAP */
+/* SAFE INPUT FOCUS: не очищаем введённые значения при получении фокуса.
+   На планшетах повторный focus может возникать при касании соседних элементов;
+   очистка здесь приводила к потере видимости и повторному расчёту HOT/N/A. */
 function clearNumberInputOnFocus(input) {
+  if (!input) return;
   input.addEventListener('focus', function() {
-    if (!this.dataset.clearedOnFocus) {
-      this.dataset.clearedOnFocus = 'true';
-      this.value = '';
-      calculate();
+    // Выделяем значение для быстрой замены, но не меняем его и не запускаем calculate().
+    // Это сохраняет видимость при нажатии кнопок таймера на сенсорных устройствах.
+    if (typeof this.select === 'function') {
+      try { this.select(); } catch (e) {}
     }
-  });
-  input.addEventListener('blur', function() {
-    delete this.dataset.clearedOnFocus;
   });
 }
 
@@ -3312,10 +3312,14 @@ function renderStopwatch() {
   if (remaining <= 0) {
     display.textContent = '00:00:00';
     display.classList.add('expired');
-    if (!isRangeTimerMode()) {
-      status.textContent = 'EXPIRED';
-    } else {
-      updateRangeStatus(0, status);
+    // Окончание HOT: три коротких сигнала и предупреждение о запрете взлёта.
+    // Срабатывает один раз при переходе таймера в состояние expired.
+    status.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
+    status.textContent = 'Взлет запрещен, проведите повторную обработку ВС';
+    status.classList.add('status-forbidden');
+    if (lastRangeStatus !== 'forbidden') {
+      playStatusChime('forbidden');
+      lastRangeStatus = 'forbidden';
     }
     if (timerRunning) {
       timerRunning = false;
