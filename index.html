@@ -627,7 +627,313 @@
       .tc-input-group input { height: 40px; font-size: 0.9rem; }
       .tc-final-value { height: 40px; font-size: 1rem; }
     }
-  </style>
+  
+
+    /* === HOT MODULE STYLES === */
+    #main-hot {
+      width: 100%;
+      gap: 14px;
+    }
+    #main-hot .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+    #main-hot .field.hidden { display: none; }
+    #main-hot .field label {
+      font-size: clamp(0.7rem, 2vw, 0.78rem);
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      padding-left: 2px;
+    }
+    #main-hot .field input,
+    #main-hot .field select {
+      width: 100%;
+      padding: 16px 18px;
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      border-radius: 16px;
+      color: #f8fafc;
+      font-size: clamp(1.1rem, 3vw, 1.25rem);
+      font-weight: 600;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-variant-numeric: tabular-nums;
+      appearance: none;
+    }
+    #main-hot .field input { text-align: right; }
+    #main-hot .field select {
+      text-align: left;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 16px;
+      padding-right: 44px;
+    }
+    #main-hot .field input:focus,
+    #main-hot .field select:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+    }
+    #main-hot .field input::placeholder {
+      color: #475569;
+      font-weight: 400;
+    }
+    #main-hot .results-row {
+      display: none;
+      width: 100%;
+      gap: 10px;
+      align-items: stretch;
+      margin-top: 4px;
+    }
+    #main-hot .results-row.active { display: flex; }
+    #main-hot .results-row.full-width { flex-direction: column; }
+    #main-hot .result-card {
+      display: none;
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      border-radius: 16px;
+      padding: 16px 18px;
+      border-left: 5px solid #3b82f6;
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
+    #main-hot .result-card.active { display: block; }
+    #main-hot .result-card.danger {
+      border-left-color: #ef4444;
+      background: rgba(239, 68, 68, 0.12);
+    }
+    #main-hot .result-card.warn-light {
+      border-left-color: #eab308;
+      background: rgba(234, 179, 8, 0.12);
+    }
+    #main-hot .result-card.warn-moderate {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.14);
+    }
+    #main-hot .result-card.ok-very-light {
+      border-left-color: #22c55e;
+      background: rgba(34, 197, 94, 0.12);
+    }
+    #main-hot .result-card.warn-mod {
+      border-left-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.10);
+    }
+    #main-hot .result-title {
+      margin: 0 0 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+    #main-hot .season-label {
+      font-size: 0.62rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    #main-hot .hot-time {
+      font-size: clamp(1.6rem, 5vw, 2rem);
+      font-weight: 900;
+      color: #3b82f6;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: #0f2946;
+      display: inline-block;
+      margin: 6px 0 2px;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    #main-hot .hot-unit {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    #main-hot .result-card.danger .hot-time {
+      color: #fff;
+      background: #ef4444;
+    }
+    #main-hot .result-card.warn-light .hot-time {
+      color: #111827;
+      background: #eab308;
+    }
+    #main-hot .result-card.warn-moderate .hot-time {
+      color: #111827;
+      background: #f59e0b;
+    }
+    #main-hot .result-card.ok-very-light .hot-time {
+      color: #052e16;
+      background: #22c55e;
+    }
+    #main-hot .result-card.warn-mod .hot-time {
+      color: #111827;
+      background: #f59e0b;
+    }
+    #main-hot .result-details {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+    }
+    #main-hot .result-details b { color: #f8fafc; }
+    #main-hot .note-box {
+      background: #0f2946;
+      border: 1.5px solid #1e40af;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      margin-top: 10px;
+      color: #93c5fd;
+    }
+    #main-hot .note-box b { color: #bfdbfe; }
+    #main-hot .hot-selected {
+      display: inline-block;
+      border: 2.5px solid #ff2020;
+      border-radius: 6px;
+      padding: 1px 7px;
+      color: inherit;
+      font-weight: 900;
+      line-height: 1.2;
+      vertical-align: middle;
+      background: rgba(255, 32, 32, 0.12);
+      box-shadow:
+        0 0 0 1.5px rgba(255, 32, 32, 0.25),
+        0 0 8px rgba(255, 32, 32, 0.5);
+    }
+    #main-hot .timer-card {
+      display: none;
+      width: 132px;
+      flex: 0 0 132px;
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      border-radius: 16px;
+      padding: 12px 10px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+    }
+    #main-hot .timer-card.active { display: flex; }
+    #main-hot .timer-title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #93c5fd;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    #main-hot .timer-display {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #22c55e;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      letter-spacing: -0.5px;
+      transition: color 0.3s;
+    }
+    #main-hot .timer-display.expired { color: #ef4444; }
+    #main-hot .timer-status {
+      width: 100%;
+      font-size: 0.62rem;
+      color: #94a3b8;
+      min-height: 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      line-height: 1.3;
+      padding: 6px 8px;
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    #main-hot .timer-status.status-cockpit {
+      color: #22c55e;
+      font-weight: 800;
+      border-color: #16a34a;
+      background: rgba(34, 197, 94, 0.12);
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25);
+    }
+    #main-hot .timer-status.status-cabin {
+      color: #f59e0b;
+      font-weight: 800;
+      border-color: #d97706;
+      background: rgba(245, 158, 11, 0.14);
+      box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25);
+    }
+    #main-hot .timer-status.status-forbidden {
+      color: #ef4444;
+      font-weight: 800;
+      text-transform: none;
+      font-size: 0.56rem;
+      letter-spacing: 0;
+      border-color: #dc2626;
+      background: rgba(239, 68, 68, 0.14);
+      box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3);
+    }
+    #main-hot .timer-buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    #main-hot .timer-button {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 4px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      transition: transform 0.1s;
+    }
+    #main-hot .timer-start { background: #16a34a; color: #fff; }
+    #main-hot .timer-pause { background: #f59e0b; color: #111827; }
+    #main-hot .timer-reset { background: #334155; color: #e2e8f0; }
+    #main-hot .timer-button:active { transform: scale(0.96); }
+    @media (max-width: 380px) {
+      #main-hot .results-row { flex-wrap: wrap; }
+      #main-hot .result-card { flex-basis: 100%; }
+      #main-hot .timer-card {
+        width: 100%;
+        flex-basis: 100%;
+      }
+      #main-hot .timer-card.active {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 14px;
+      }
+      #main-hot .timer-title,
+      #main-hot .timer-status { grid-column: 1 / -1; }
+      #main-hot .timer-display {
+        grid-column: 1 / -1;
+        font-size: 1.6rem;
+      }
+      #main-hot .timer-buttons {
+        flex-direction: row;
+        grid-column: 1 / -1;
+      }
+    }
+
+    </style>
 </head>
 <body>
   <div class="app" id="appContainer">
@@ -651,6 +957,7 @@
       <button class="main-tab-btn" id="btnMainDow" onclick="switchMainTab('main-dow', this)">DOW/DOI</button>
       <button class="main-tab-btn" id="btnMainWind" onclick="switchMainTab('main-wind', this)">Wind</button>
       <button class="main-tab-btn" id="btnMainTemp" onclick="switchMainTab('main-temp', this)">Temp</button>
+      <button class="main-tab-btn" id="btnMainHot" onclick="switchMainTab('main-hot', this)">HOT</button>
     </div>
 
     <!-- ==================== FUEL ==================== -->
@@ -929,11 +1236,81 @@
       <button type="button" class="reset-btn" onclick="resetTemp()">Сброс</button>
     </div>
 
+
+    <!-- ==================== HOT ==================== -->
+    <div id="main-hot" class="main-tab-content">
+      <div class="field">
+        <label for="fluidType">Тип жидкости</label>
+        <select id="fluidType" onchange="updateControls()">
+          <option value="typeI">Тип I</option>
+          <option value="typeII">Тип II</option>
+          <option value="typeIV" selected>Тип IV</option>
+        </select>
+      </div>
+      <div class="field" id="brandField">
+        <label for="fluidBrand">Марка жидкости (Тип IV)</label>
+        <select id="fluidBrand" onchange="updateControls()">
+          <option value="IV" selected>Generic</option>
+          <option value="IV_AVIAFLIGHT">AVIAFLIGHT EG</option>
+          <option value="IV_DEFROST">DEFROST ECO 4</option>
+          <option value="IV_GREEN">GREEN FLO</option>
+          <option value="IV_MIXTURE">AVIAFLIGHT EG & GREEN FLO Mixture</option>
+        </select>
+      </div>
+      <div class="field" id="concField">
+        <label for="concentration">Концентрация</label>
+        <select id="concentration" onchange="calculate()">
+          <option value="100/0" selected>100/0</option>
+          <option value="75/25">75/25</option>
+          <option value="50/50">50/50</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="oat">Температура (OAT, °C)</label>
+        <input type="text" id="oat" placeholder="Например: -2" inputmode="text" autocomplete="off" oninput="onOatInput()">
+      </div>
+      <div class="field hidden" id="visibilityField">
+        <label for="vis">Видимость (м)</label>
+        <input type="number" id="vis" placeholder="Например: 1500" step="100" min="0" inputmode="decimal" oninput="calculate()">
+      </div>
+      <div class="field hidden" id="timeOfDayField">
+        <label for="timeOfDay">Время суток</label>
+        <select id="timeOfDay" onchange="calculate()">
+          <option value="day">День</option>
+          <option value="night">Ночь</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="precipitationType">Тип осадков</label>
+        <select id="precipitationType" onchange="updateControls()"></select>
+      </div>
+
+      <div class="results-row" id="resultsRow">
+        <div class="result-card" id="resultCard">
+          <h3 class="result-title" id="resultTitle">Результат</h3>
+          <span class="season-label">Сезон 2026–2027</span>
+          <div class="hot-time" id="hotValue">--:--</div>
+          <div class="hot-unit" id="hotUnit"></div>
+          <div class="result-details" id="resultDetails"></div>
+          <div id="noteBox" class="note-box" style="display:none;"></div>
+        </div>
+        <div class="timer-card" id="timerCard">
+          <div class="timer-status" id="timerStatus">READY</div>
+          <div class="timer-title">HOLDOVER TIMER</div>
+          <div class="timer-display" id="timerDisplay">00:00:00</div>
+          <div class="timer-buttons">
+            <button type="button" class="timer-button timer-start" id="timerStartButton">START TIME</button>
+            <button type="button" class="timer-button timer-reset" id="timerResetButton">RESET</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ==================== ФУТЕР (Версия) ==================== -->
     <div class="footer">
       <div class="dot active" title="Загружено"></div>
-      <div class="dot active" title="Версия 2"></div>
-      <span class="version-text">v2.0</span>
+      <div class="dot active" title="Версия 3"></div>
+      <span class="version-text">v3.0</span>
     </div>
 
   </div>
@@ -1594,6 +1971,1426 @@
     resetDouble();
     resetDow();
     resetTemp();
+
+  
+
+    // ========== HOT MODULE ==========
+"use strict";
+
+/* TABLE 1 — Active Frost */
+const TABLE_ACTIVE_FROST = {
+  typeI: {
+    "100/0": {
+      above_minus1: 45, b1_3: 45, b3_10: 45,
+      b10_14: 45, b14_21: 45, b21_25: 45, below_25: 45
+    }
+  },
+  typeII: {
+    "100/0": {
+      above_minus1: 480, b1_3: 480, b3_6: 480,
+      b6_10: 480, b10_14: 360, b14_21: 180,
+      b21_25: 120, below_25: null
+    },
+    "75/25": {
+      above_minus1: 300, b1_3: 300, b3_6: 300,
+      b6_10: 240, b10_14: 60, b14_21: null,
+      b21_25: null, below_25: null
+    },
+    "50/50": {
+      above_minus1: 120, b1_3: 90, b3_6: null,
+      b6_10: null, b10_14: null, b14_21: null,
+      b21_25: null, below_25: null
+    }
+  },
+  typeIV: {
+    "100/0": {
+      above_minus1: 720, b1_3: 720, b3_6: 720,
+      b6_10: 600, b10_14: 360, b14_21: 360,
+      b21_25: 240, below_25: null
+    },
+    "75/25": {
+      above_minus1: 300, b1_3: 300, b3_6: 300,
+      b6_10: 300, b10_14: 60, b14_21: null,
+      b21_25: null, below_25: null
+    },
+    "50/50": {
+      above_minus1: 180, b1_3: 180, b3_6: null,
+      b6_10: null, b10_14: null, b14_21: null,
+      b21_25: null, below_25: null
+    }
+  }
+};
+
+/* TABLE 2 — Type I */
+const TABLE_TYPE_I = {
+  above_minus3: {
+    freezing_fog: [11, 17],
+    snow_freezing_fog: [6, 11],
+    very_light: [18, 22],
+    light: [11, 18],
+    moderate: [6, 11],
+    freezing_drizzle: [9, 13],
+    light_freezing_rain: [2, 5],
+    moderate_snow_rain: [2, 2],
+    rain_cold_soaked: [2, 5],
+    other: null
+  },
+  b3_6: {
+    freezing_fog: [8, 13],
+    snow_freezing_fog: [5, 8],
+    very_light: [14, 17],
+    light: [8, 14],
+    moderate: [5, 8],
+    freezing_drizzle: [5, 9],
+    light_freezing_rain: [2, 5],
+    moderate_snow_rain: null,
+    rain_cold_soaked: null,
+    other: null
+  },
+  b6_10: {
+    freezing_fog: [6, 10],
+    snow_freezing_fog: [4, 6],
+    very_light: [11, 13],
+    light: [6, 11],
+    moderate: [4, 6],
+    freezing_drizzle: [4, 7],
+    light_freezing_rain: [2, 5],
+    moderate_snow_rain: null,
+    rain_cold_soaked: null,
+    other: null
+  },
+  below_10: {
+    freezing_fog: [5, 9],
+    snow_freezing_fog: [2, 4],
+    very_light: [7, 8],
+    light: [4, 7],
+    moderate: [2, 4],
+    freezing_drizzle: null,
+    light_freezing_rain: null,
+    moderate_snow_rain: null,
+    rain_cold_soaked: null,
+    other: null
+  }
+};
+
+/* TABLE 3 — Generic Type II (FAA 2026-2027) */
+const TABLE_TYPE_II = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [55, 110],
+      snow_freezing_fog: [20, 40],
+      very_light: [30, 55],
+      light: [30, 55],
+      moderate: [30, 55],
+      freezing_drizzle: [35, 65],
+      light_freezing_rain: [25, 35],
+      moderate_snow_rain: [5, 5],
+      rain_cold_soaked: [7, 45],
+      other: null
+    },
+    b3_8: {
+      freezing_fog: [30, 45],
+      snow_freezing_fog: [15, 30],
+      very_light: [20, 40],
+      light: [20, 40],
+      moderate: [20, 40],
+      freezing_drizzle: [20, 45],
+      light_freezing_rain: [15, 20],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b8_14: {
+      freezing_fog: [30, 45],
+      snow_freezing_fog: [10, 25],
+      very_light: [15, 30],
+      light: [15, 30],
+      moderate: [15, 30],
+      freezing_drizzle: [20, 45],
+      light_freezing_rain: [15, 20],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b14_18: {
+      freezing_fog: [15, 20],
+      snow_freezing_fog: [1, 5],
+      very_light: [2, 7],
+      light: [2, 7],
+      moderate: [2, 7],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b18_25: {
+      freezing_fog: [15, 20],
+      snow_freezing_fog: [0, 2],
+      very_light: [1, 3],
+      light: [1, 3],
+      moderate: [1, 3],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    below_25: {
+      freezing_fog: [15, 20],
+      snow_freezing_fog: [0, 0],
+      very_light: [0, 1],
+      light: [0, 1],
+      moderate: [0, 1],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    }
+  },
+  "75/25": {
+    above_minus3: {
+      freezing_fog: [40, 70],
+      snow_freezing_fog: [15, 25],
+      very_light: [15, 30],
+      light: [15, 30],
+      moderate: [15, 30],
+      freezing_drizzle: [25, 40],
+      light_freezing_rain: [15, 25],
+      moderate_snow_rain: [3, 3],
+      rain_cold_soaked: [4, 25],
+      other: null
+    },
+    b3_8: {
+      freezing_fog: [25, 55],
+      snow_freezing_fog: [9, 15],
+      very_light: [10, 25],
+      light: [10, 25],
+      moderate: [10, 25],
+      freezing_drizzle: [15, 30],
+      light_freezing_rain: [9, 20],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b8_14: {
+      freezing_fog: [25, 55],
+      snow_freezing_fog: [7, 15],
+      very_light: [9, 20],
+      light: [9, 20],
+      moderate: [9, 20],
+      freezing_drizzle: [15, 30],
+      light_freezing_rain: [9, 20],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b14_18: null,
+    b18_25: null,
+    below_25: null
+  },
+  "50/50": {
+    above_minus3: {
+      freezing_fog: [15, 30],
+      snow_freezing_fog: [5, 10],
+      very_light: [7, 15],
+      light: [7, 15],
+      moderate: [7, 15],
+      freezing_drizzle: [9, 15],
+      light_freezing_rain: [6, 9],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b3_8: null,
+    b8_14: null,
+    b14_18: null,
+    b18_25: null,
+    below_25: null
+  }
+};
+
+/* TABLE 4 — Generic Type IV (Winter 2026-2027) */
+const TABLE_TYPE_IV = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [75, 135],
+      snow_freezing_fog: [20, 40],
+      very_light: [110, 135],
+      light: [55, 110],
+      moderate: [25, 55],
+      freezing_drizzle: [35, 70],
+      light_freezing_rain: [15, 30],
+      moderate_snow_rain: [6, 6],
+      rain_cold_soaked: [8, 65],
+      other: null
+    },
+    b3_8: {
+      freezing_fog: [15, 35],
+      snow_freezing_fog: [20, 35],
+      very_light: [95, 120],
+      light: [45, 95],
+      moderate: [25, 45],
+      freezing_drizzle: [25, 60],
+      light_freezing_rain: [20, 25],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b8_14: {
+      freezing_fog: [15, 35],
+      snow_freezing_fog: [15, 30],
+      very_light: [85, 110],
+      light: [45, 85],
+      moderate: [20, 45],
+      freezing_drizzle: [25, 60],
+      light_freezing_rain: [15, 25],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b14_18: {
+      freezing_fog: [15, 25],
+      snow_freezing_fog: [1, 6],
+      very_light: [30, 45],
+      light: [9, 30],
+      moderate: [2, 9],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b18_25: {
+      freezing_fog: [15, 25],
+      snow_freezing_fog: [0, 2],
+      very_light: [10, 20],
+      light: [3, 10],
+      moderate: [1, 3],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    below_25: {
+      freezing_fog: [15, 25],
+      snow_freezing_fog: [0, 1],
+      very_light: [7, 10],
+      light: [2, 7],
+      moderate: [0, 2],
+      freezing_drizzle: null,
+      light_freezing_rain: null,
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    }
+  },
+  "75/25": {
+    above_minus3: {
+      freezing_fog: [85, 160],
+      snow_freezing_fog: [30, 55],
+      very_light: [125, 145],
+      light: [75, 125],
+      moderate: [40, 75],
+      freezing_drizzle: [60, 80],
+      light_freezing_rain: [30, 50],
+      moderate_snow_rain: [7, 7],
+      rain_cold_soaked: [9, 80],
+      other: null
+    },
+    b3_8: {
+      freezing_fog: [40, 80],
+      snow_freezing_fog: [25, 50],
+      very_light: [110, 130],
+      light: [65, 110],
+      moderate: [30, 65],
+      freezing_drizzle: [20, 65],
+      light_freezing_rain: [15, 25],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b8_14: {
+      freezing_fog: [40, 80],
+      snow_freezing_fog: [20, 45],
+      very_light: [105, 120],
+      light: [55, 105],
+      moderate: [25, 55],
+      freezing_drizzle: [20, 65],
+      light_freezing_rain: [15, 25],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b14_18: null,
+    b18_25: null,
+    below_25: null
+  },
+  "50/50": {
+    above_minus3: {
+      freezing_fog: [30, 55],
+      snow_freezing_fog: [7, 20],
+      very_light: [60, 70],
+      light: [25, 60],
+      moderate: [10, 25],
+      freezing_drizzle: [15, 40],
+      light_freezing_rain: [9, 20],
+      moderate_snow_rain: null,
+      rain_cold_soaked: null,
+      other: null
+    },
+    b3_8: null,
+    b8_14: null,
+    b14_18: null,
+    b18_25: null,
+    below_25: null
+  }
+};
+
+/* TABLE 4A — AVIAFLIGHT EG Type IV (100/0 ONLY) */
+const TABLE_TYPE_IV_AVIAFLIGHT = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [90, 185], snow_freezing_fog: [30, 50],
+      very_light: [115, 140], light: [70, 115], moderate: [40, 70],
+      freezing_drizzle: [65, 120], light_freezing_rain: [30, 50],
+      moderate_snow_rain: [9, 9], rain_cold_soaked: [10, 120], other: null
+    },
+    b3_8: {
+      freezing_fog: [80, 180], snow_freezing_fog: [25, 45],
+      very_light: [105, 125], light: [60, 105], moderate: [35, 60],
+      freezing_drizzle: [55, 90], light_freezing_rain: [35, 50],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b8_14: {
+      freezing_fog: [80, 180], snow_freezing_fog: [25, 40],
+      very_light: [95, 115], light: [55, 95], moderate: [30, 55],
+      freezing_drizzle: [55, 90], light_freezing_rain: [35, 50],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b14_18: {
+      freezing_fog: [35, 105], snow_freezing_fog: [20, 40],
+      very_light: [100, 120], light: [50, 100], moderate: [25, 50],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b18_25: {
+      freezing_fog: [35, 105], snow_freezing_fog: [15, 30],
+      very_light: [80, 95], light: [40, 80], moderate: [20, 40],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b25_31: {
+      freezing_fog: [35, 65], snow_freezing_fog: [7, 15],
+      very_light: [35, 45], light: [20, 35], moderate: [9, 20],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    }
+  },
+  "75/25": null,
+  "50/50": null
+};
+
+/* TABLE 4B — DEFROST ECO 4 Type IV (100/0 ONLY) */
+const TABLE_TYPE_IV_DEFROST = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [90, 160], snow_freezing_fog: [30, 55],
+      very_light: [150, 180], light: [75, 150], moderate: [35, 75],
+      freezing_drizzle: [65, 90], light_freezing_rain: [40, 65],
+      moderate_snow_rain: [10, 10], rain_cold_soaked: [15, 70], other: null
+    },
+    b3_8: {
+      freezing_fog: [55, 155], snow_freezing_fog: [25, 50],
+      very_light: [135, 165], light: [65, 135], moderate: [35, 65],
+      freezing_drizzle: [50, 80], light_freezing_rain: [35, 50],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b8_14: {
+      freezing_fog: [55, 155], snow_freezing_fog: [25, 45],
+      very_light: [125, 155], light: [60, 125], moderate: [30, 60],
+      freezing_drizzle: [50, 80], light_freezing_rain: [35, 50],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b14_18: {
+      freezing_fog: [30, 50], snow_freezing_fog: [1, 6],
+      very_light: [30, 45], light: [9, 30], moderate: [2, 9],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b18_25: {
+      freezing_fog: [30, 50], snow_freezing_fog: [0, 2],
+      very_light: [10, 20], light: [3, 10], moderate: [1, 3],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b25_31: {
+      freezing_fog: [30, 50], snow_freezing_fog: [0, 1],
+      very_light: [7, 10], light: [2, 7], moderate: [0, 2],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    }
+  },
+  "75/25": null,
+  "50/50": null
+};
+
+/* TABLE 4C — GREEN FLO Type IV (100/0 ONLY) */
+const TABLE_TYPE_IV_GREEN = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [75, 150], snow_freezing_fog: [20, 40],
+      very_light: [110, 135], light: [55, 110], moderate: [25, 55],
+      freezing_drizzle: [35, 70], light_freezing_rain: [15, 30],
+      moderate_snow_rain: [6, 6], rain_cold_soaked: [8, 70], other: null
+    },
+    b3_8: {
+      freezing_fog: [50, 155], snow_freezing_fog: [20, 35],
+      very_light: [95, 120], light: [45, 95], moderate: [25, 45],
+      freezing_drizzle: [35, 60], light_freezing_rain: [20, 30],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b8_14: {
+      freezing_fog: [50, 155], snow_freezing_fog: [15, 30],
+      very_light: [85, 110], light: [45, 85], moderate: [20, 45],
+      freezing_drizzle: [35, 60], light_freezing_rain: [20, 30],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b14_18: {
+      freezing_fog: [35, 70], snow_freezing_fog: [10, 25],
+      very_light: [80, 105], light: [35, 80], moderate: [15, 35],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b18_25: {
+      freezing_fog: [35, 70], snow_freezing_fog: [10, 25],
+      very_light: [70, 90], light: [30, 70], moderate: [15, 30],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b25_31: {
+      freezing_fog: [25, 60], snow_freezing_fog: [4, 10],
+      very_light: [35, 40], light: [15, 35], moderate: [6, 15],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    }
+  },
+  "75/25": null,
+  "50/50": null
+};
+
+/* TABLE 4D — AVIAFLIGHT EG & GREEN FLO Type IV Mixture (100/0 ONLY) */
+const TABLE_TYPE_IV_MIXTURE = {
+  "100/0": {
+    above_minus3: {
+      freezing_fog: [75, 150], snow_freezing_fog: [20, 40],
+      very_light: [110, 135], light: [55, 110], moderate: [25, 55],
+      freezing_drizzle: [35, 70], light_freezing_rain: [15, 30],
+      moderate_snow_rain: [6, 6], rain_cold_soaked: [8, 70], other: null
+    },
+    b3_8: {
+      freezing_fog: [50, 155], snow_freezing_fog: [20, 35],
+      very_light: [95, 120], light: [45, 95], moderate: [25, 45],
+      freezing_drizzle: [35, 60], light_freezing_rain: [20, 30],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b8_14: {
+      freezing_fog: [50, 155], snow_freezing_fog: [15, 30],
+      very_light: [85, 110], light: [45, 85], moderate: [20, 45],
+      freezing_drizzle: [35, 60], light_freezing_rain: [20, 30],
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b14_18: {
+      freezing_fog: [35, 70], snow_freezing_fog: [10, 25],
+      very_light: [80, 105], light: [35, 80], moderate: [15, 35],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b18_25: {
+      freezing_fog: [35, 70], snow_freezing_fog: [10, 25],
+      very_light: [70, 90], light: [30, 70], moderate: [15, 30],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    },
+    b25_31: {
+      freezing_fog: [25, 60], snow_freezing_fog: [4, 10],
+      very_light: [35, 40], light: [15, 35], moderate: [6, 15],
+      freezing_drizzle: null, light_freezing_rain: null,
+      moderate_snow_rain: null, rain_cold_soaked: null, other: null
+    }
+  },
+  "75/25": null,
+  "50/50": null
+};
+
+/* PRECIPITATION SETS */
+const PRECIP_SETS = {
+  typeI: [
+    { value: 'active_frost', label: 'Активное образование инея (Active Frost)', note: '' },
+    { value: 'freezing_fog', label: 'Переохлаждённый туман / Дымка / Ледяные кристаллы', note: 'Прим. 4: Используйте это время, если ледяные кристаллы смешаны с переохлаждённым туманом или дымкой.' },
+    { value: 'snow_freezing_fog', label: 'Снег с переохлаждённым туманом', note: '' },
+    { value: 'snow', label: 'Снег / Снежная крупа', note: 'Прим. 5, 6: Интенсивность определяется по Таблице 5. При смешивании снега с ледяными кристаллами используйте время для снега.' },
+    { value: 'freezing_drizzle', label: 'Переохлаждённая морось', note: 'Прим. 7: Включает слабую, умеренную и сильную морось. Если не уверены — используйте время для слабого переохлаждённого дождя.' },
+    { value: 'light_freezing_rain', label: 'Слабый переохлаждённый дождь', note: '' },
+    { value: 'moderate_snow_rain', label: 'Умеренный снег с дождём', note: 'Прим. 8: Только для умеренной интенсивности. Для слабого снега с дождём используйте время слабого переохлаждённого дождя.' },
+    { value: 'rain_cold_soaked', label: 'Дождь на переохлаждённом крыле', note: 'Прим. 9: HOT не существует при температуре ниже −3 °C.' },
+    { value: 'other', label: 'Другие (сильный снег, ледяная крупа, град)', note: 'Прим. 10: Включает сильный снег, ледяные кристаллы, умеренный/сильный дождь, мелкий град и град. HOT не существует.' }
+  ],
+  typeII: [],
+  typeIV: []
+};
+
+PRECIP_SETS.typeII = PRECIP_SETS.typeI.map(x => ({...x}));
+PRECIP_SETS.typeIV = PRECIP_SETS.typeI.map(x => ({...x}));
+
+/* HELPERS */
+function formatTime(minutes) {
+  if (!Number.isFinite(minutes)) return "N/A";
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  // Явный формат ч:мм, чтобы 5:00 читалось как 5 часов, а не 5 минут
+  if (h === 0) return `0:${String(m).padStart(2, '0')}`;
+  return `${h}:${String(m).padStart(2, '0')}`;
+}
+
+function formatTimeLabel(minutes) {
+  if (!Number.isFinite(minutes)) return '';
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (h === 0) return `${m} мин`;
+  if (m === 0) return `${h} ч`;
+  return `${h} ч ${String(m).padStart(2, '0')} мин`;
+}
+
+function formatRange(range) {
+  if (!range || !Array.isArray(range)) return "N/A";
+  const [min, max] = range;
+  if (min === max) return formatTime(min);
+  return `${formatTime(min)} - ${formatTime(max)}`;
+}
+
+/* HIGHLIGHT SELECTED SNOW HOT TIME (Type I / Type II) */
+function formatSnowRange(range, intensity) {
+  if (!range || !Array.isArray(range)) return 'N/A';
+  const [min, max] = range;
+  if (min === max) return `<span class="hot-selected">${formatTime(min)}</span>`;
+  if (intensity === 'moderate') return `<span class="hot-selected">${formatTime(min)}</span> - ${formatTime(max)}`;
+  if (intensity === 'light' || intensity === 'very_light') return `${formatTime(min)} - <span class="hot-selected">${formatTime(max)}</span>`;
+  return formatRange(range);
+}
+
+/* HIGHLIGHT SELECTED DRIZZLE HOT TIME */
+function formatDrizzleRange(range, intensity) {
+  if (!range || !Array.isArray(range)) return 'N/A';
+  const [min, max] = range;
+  if (min === max) return `<span class="hot-selected">${formatTime(min)}</span>`;
+  if (intensity === 'light') return `${formatTime(min)} - <span class="hot-selected">${formatTime(max)}</span>`;
+  if (intensity === 'moderate') return `<span class="hot-selected">${formatTime(min)}</span> - ${formatTime(max)}`;
+  return formatRange(range);
+}
+
+/* PRECIPITATION NAME — ENGLISH */
+function formatPrecipitationName(precip) {
+  const names = {
+    active_frost: 'Active Frost', freezing_fog: 'Freezing Fog',
+    snow_freezing_fog: 'Snow with Freezing Fog', snow: 'Snow',
+    very_light: 'Very Light Snow', light: 'Light Snow', moderate: 'Moderate Snow',
+    freezing_drizzle: 'Freezing Drizzle', light_freezing_rain: 'Light Freezing Rain',
+    moderate_snow_rain: 'Moderate Snow with Rain', rain_cold_soaked: 'Rain on Cold-Soaked Wing',
+    other: 'Other'
+  };
+  return names[precip] || String(precip || '').replaceAll('_', ' ');
+}
+
+/* SNOW INTENSITY — TABLE 5 */
+function getSnowIntensity(vis, timeOfDay, oat) {
+  if (!Number.isFinite(vis) || vis < 0) return null;
+  if (!Number.isFinite(oat)) return null;
+  const isBelowMinus1 = oat <= -1;
+  if (timeOfDay === 'day') {
+    if (isBelowMinus1) {
+      if (vis <= 400) return 'heavy';
+      if (vis <= 1400) return 'moderate';
+      if (vis <= 2600) return 'light';
+      return 'very_light';
+    } else {
+      if (vis <= 1000) return 'heavy';
+      if (vis <= 1400) return 'moderate';
+      if (vis <= 3000) return 'light';
+      return 'very_light';
+    }
+  } else {
+    if (isBelowMinus1) {
+      if (vis <= 1000) return 'heavy';
+      if (vis <= 2600) return 'moderate';
+      if (vis <= 4400) return 'light';
+      return 'very_light';
+    } else {
+      if (vis <= 1400) return 'heavy';
+      if (vis <= 2200) return 'moderate';
+      if (vis <= 4400) return 'light';
+      return 'very_light';
+    }
+  }
+}
+
+/* DRIZZLE INTENSITY — TABLE 7 */
+function getDrizzleIntensity(vis) {
+  if (!Number.isFinite(vis) || vis < 0) return null;
+  if (vis > 805) return 'light';
+  if (vis > 402) return 'moderate';
+  return 'heavy';
+}
+
+/* BANDS */
+function getActiveFrostBand(oat, fluidType) {
+  if (!Number.isFinite(oat)) return null;
+  if (fluidType === 'typeI') {
+    if (oat >= -1) return 'above_minus1';
+    if (oat >= -3) return 'b1_3';
+    if (oat >= -10) return 'b3_10';
+    if (oat >= -14) return 'b10_14';
+    if (oat >= -21) return 'b14_21';
+    if (oat >= -25) return 'b21_25';
+    return 'below_25';
+  }
+  if (oat >= -1) return 'above_minus1';
+  if (oat >= -3) return 'b1_3';
+  if (oat >= -6) return 'b3_6';
+  if (oat >= -10) return 'b6_10';
+  if (oat >= -14) return 'b10_14';
+  if (oat >= -21) return 'b14_21';
+  if (oat >= -25) return 'b21_25';
+  return 'below_25';
+}
+
+function getTypeIBand(oat) {
+  if (!Number.isFinite(oat)) return null;
+  if (oat >= -3) return 'above_minus3';
+  if (oat >= -6) return 'b3_6';
+  if (oat >= -10) return 'b6_10';
+  return 'below_10';
+}
+
+function getTypeIIBand(oat) {
+  if (!Number.isFinite(oat)) return null;
+  if (oat >= -3) return 'above_minus3';
+  if (oat >= -8) return 'b3_8';
+  if (oat >= -14) return 'b8_14';
+  if (oat >= -18) return 'b14_18';
+  if (oat >= -25) return 'b18_25';
+  return 'below_25';
+}
+
+function getTypeIVBand(oat) {
+  if (!Number.isFinite(oat)) return null;
+  if (oat >= -3) return 'above_minus3';
+  if (oat >= -8) return 'b3_8';
+  if (oat >= -14) return 'b8_14';
+  if (oat >= -18) return 'b14_18';
+  if (oat >= -25) return 'b18_25';
+  if (oat >= -31) return 'b25_31';
+  return 'below_25_31';
+}
+
+/* OAT: allow minus on mobile keyboards (type=text) */
+function onOatInput() {
+  const el = document.getElementById('oat');
+  let s = el.value.replace(',', '.');
+  // keep only leading minus, digits and one dot
+  let neg = s.startsWith('-');
+  s = s.replace(/[^0-9.]/g, '');
+  const dot = s.indexOf('.');
+  if (dot !== -1) s = s.slice(0, dot + 1) + s.slice(dot + 1).replace(/\./g, '');
+  if (neg) s = '-' + s;
+  if (s !== el.value) el.value = s;
+  calculate();
+}
+
+/* CLEAR NUMBER INPUT ON FIRST TAP */
+function clearNumberInputOnFocus(input) {
+  input.addEventListener('focus', function() {
+    if (!this.dataset.clearedOnFocus) {
+      this.dataset.clearedOnFocus = 'true';
+      this.value = '';
+      calculate();
+    }
+  });
+  input.addEventListener('blur', function() {
+    delete this.dataset.clearedOnFocus;
+  });
+}
+
+/* UI CONTROLS */
+function updateControls() {
+  const fluid = document.getElementById('fluidType').value;
+  const brand = document.getElementById('fluidBrand').value;
+  const precipSelect = document.getElementById('precipitationType');
+  const current = precipSelect.value;
+
+  const hideBrand = fluid !== 'typeIV' || current === 'active_frost';
+  document.getElementById('brandField').classList.toggle('hidden', hideBrand);
+  document.getElementById('concField').classList.toggle('hidden', fluid === 'typeI');
+
+  const concSelect = document.getElementById('concentration');
+  const isGeneric = brand === 'IV';
+  const opts = concSelect.options;
+
+  if (!isGeneric && fluid === 'typeIV') {
+    concSelect.value = '100/0';
+    for (let i = 0; i < opts.length; i++) {
+      if (opts[i].value === '75/25' || opts[i].value === '50/50') {
+        opts[i].style.display = 'none';
+      } else {
+        opts[i].style.display = 'block';
+      }
+    }
+  } else {
+    for (let i = 0; i < opts.length; i++) {
+      opts[i].style.display = 'block';
+    }
+  }
+
+  const set = PRECIP_SETS[fluid] || [];
+  precipSelect.innerHTML = '';
+
+  set.forEach(item => {
+    const option = document.createElement('option');
+    option.value = item.value;
+    option.textContent = item.label;
+    precipSelect.appendChild(option);
+  });
+
+  if (set.some(i => i.value === current)) {
+    precipSelect.value = current;
+  } else if (set.some(i => i.value === 'snow')) {
+    precipSelect.value = 'snow'; // по умолчанию: Снег / Снежная крупа
+  }
+
+  const selectedPrecip = precipSelect.value;
+
+  const needsVis = ['snow', 'snow_freezing_fog', 'freezing_drizzle'].includes(selectedPrecip);
+  document.getElementById('visibilityField').classList.toggle('hidden', !needsVis);
+
+  const needsTimeOfDay = ['snow', 'snow_freezing_fog'].includes(selectedPrecip);
+  document.getElementById('timeOfDayField').classList.toggle('hidden', !needsTimeOfDay);
+
+  calculate();
+}
+
+/* MAIN CALCULATION */
+function calculate() {
+  const fluid = document.getElementById('fluidType').value;
+  const brand = document.getElementById('fluidBrand').value;
+  const conc = document.getElementById('concentration').value;
+  const oat = parseFloat(document.getElementById('oat').value);
+  const precip = document.getElementById('precipitationType').value;
+  const vis = parseFloat(document.getElementById('vis').value);
+  const timeOfDay = document.getElementById('timeOfDay').value;
+
+  const row = document.getElementById('resultsRow');
+  const card = document.getElementById('resultCard');
+  const timerCard = document.getElementById('timerCard');
+  const title = document.getElementById('resultTitle');
+  const value = document.getElementById('hotValue');
+  const details = document.getElementById('resultDetails');
+  const noteBox = document.getElementById('noteBox');
+
+  // Полный сброс перед расчетом
+  window._selectedHotMinutes = null;
+  timerTargetMinutes = 0;
+  timerRangeMin = null;
+  timerRangeMax = null;
+  resetStopwatchDisplay();
+  timerCard.classList.remove('active');
+  row.classList.remove('full-width');
+
+  card.className = 'result-card';
+  noteBox.style.display = 'none';
+  window._drizzleIntensity = null;
+  const unitClear = document.getElementById('hotUnit');
+  if (unitClear) unitClear.textContent = '';
+
+  if (!Number.isFinite(oat)) {
+    card.classList.remove('active');
+    row.classList.remove('active');
+    title.innerHTML = 'Результат';
+    value.innerText = '--:--';
+    const unitEl = document.getElementById('hotUnit');
+    if (unitEl) unitEl.textContent = '';
+    details.innerHTML = '';
+    return;
+  }
+
+  row.classList.add('active');
+  card.classList.add('active');
+
+  const set = PRECIP_SETS[fluid] || [];
+  const precipObj = set.find(i => i.value === precip);
+
+  if (precipObj && precipObj.note) {
+    noteBox.innerHTML = `<b>${precipObj.note}</b>`;
+    noteBox.style.display = 'block';
+  }
+
+  const notReady = () => {
+    card.classList.add('danger');
+    title.innerHTML = 'ТАБЛИЦА НЕ ЗАГРУЖЕНА';
+    value.innerText = 'N/A';
+    details.innerHTML = 'Соответствующая таблица HOT ещё не заполнена.';
+    row.classList.add('full-width'); // Растянуть карточку
+  };
+
+  /* GLOBAL NOTE CHECKS (Прим. 8 и Прим. 9 для всех типов) */
+  if (precip === 'moderate_snow_rain' && oat <= 0) {
+    card.classList.add('danger');
+    title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+    value.innerText = 'N/A';
+    details.innerHTML = `Для умеренного снега с дождём при ${oat}°C время защитного действия не предусмотрено (Прим. 8).`;
+    row.classList.add('full-width');
+    return;
+  }
+
+  if (precip === 'rain_cold_soaked' && oat < -3) {
+    card.classList.add('danger');
+    title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+    value.innerText = 'N/A';
+    details.innerHTML = `Для дождя на переохлаждённом крыле при ${oat}°C время защитного действия не предусмотрено (Прим. 9).`;
+    row.classList.add('full-width');
+    return;
+  }
+
+  /* ACTIVE FROST */
+  if (precip === 'active_frost') {
+    if (fluid === 'typeI') {
+      card.classList.add('ok-very-light');
+      title.innerHTML = 'HOT (Active Frost, Type I)';
+      value.innerText = '0:45';
+      details.innerHTML = `Temperature: <b>${oat}°C</b>.<br>Active frost formation.`;
+      setTimerTarget(45);
+      return;
+    }
+
+    const table = TABLE_ACTIVE_FROST[fluid]?.[conc];
+    if (table === null || table === undefined) return notReady();
+
+    const band = getActiveFrostBand(oat, fluid);
+    const min = table[band];
+
+    if (min === null || min === undefined) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (${fluid}, ${conc}, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    card.classList.add('ok-very-light');
+    title.innerHTML = `HOT (Active Frost, ${fluid}, ${conc})`;
+    value.innerText = formatTime(min);
+    details.innerHTML = `Temperature: <b>${oat}°C</b>.<br>Active frost formation.`;
+    setTimerTarget(min);
+    return;
+  }
+
+  /* AUTOMATIC SNOW INTENSITY */
+  let actualPrecip = precip;
+  let intensityLabel = '';
+  let snowIntensity = null;
+
+  if (precip === 'snow' || precip === 'snow_freezing_fog') {
+    snowIntensity = getSnowIntensity(vis, timeOfDay, oat);
+
+    if (!Number.isFinite(vis) || vis < 0 || snowIntensity === null) {
+      card.classList.add('danger');
+      title.innerHTML = 'НУЖНА ВИДИМОСТЬ';
+      value.innerText = 'N/A';
+      details.innerHTML = 'Введите корректную видимость для автоматического определения интенсивности снега.';
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (snowIntensity === 'heavy') {
+      card.classList.add('danger');
+      title.innerHTML = 'HEAVY SNOW — СИЛЬНЫЙ СНЕГ';
+      value.innerText = 'N/A';
+      details.innerHTML = `Intensity: <b>HEAVY SNOW</b>.<br>OAT: <b>${oat}°C</b>.<br>Visibility: <b>${vis} m</b>.<br>HOT does not exist.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (precip === 'snow') actualPrecip = snowIntensity;
+
+    const snowLabels = {
+      very_light: 'VERY LIGHT SNOW',
+      light: 'LIGHT SNOW',
+      moderate: 'MODERATE SNOW'
+    };
+    intensityLabel = snowLabels[snowIntensity];
+  }
+
+  if (precip === 'freezing_drizzle') {
+    const intensity = getDrizzleIntensity(vis);
+    if (!Number.isFinite(vis) || vis < 0 || intensity === null) {
+      card.classList.add('danger');
+      title.innerHTML = 'НУЖНА ВИДИМОСТЬ';
+      value.innerText = 'N/A';
+      details.innerHTML = 'Введите корректную видимость для определения интенсивности мороси.';
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (intensity === 'heavy') {
+      card.classList.add('danger');
+      title.innerHTML = 'HEAVY DRIZZLE — СИЛЬНАЯ МОРОСЬ';
+      value.innerText = 'N/A';
+      details.innerHTML = `Intensity: <b>HEAVY FREEZING DRIZZLE</b>.<br>OAT: <b>${oat}°C</b>.<br>Visibility: <b>${vis} m</b>.<br>HOT does not exist.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    actualPrecip = 'freezing_drizzle';
+    window._drizzleIntensity = intensity;
+    intensityLabel = intensity === 'light' ? 'LIGHT FREEZING DRIZZLE' : 'MODERATE FREEZING DRIZZLE';
+  }
+
+  /* TYPE I */
+  if (fluid === 'typeI') {
+    const band = getTypeIBand(oat);
+    let range = TABLE_TYPE_I[band]?.[actualPrecip];
+
+    if (!range) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type I, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (precip === 'snow' || precip === 'snow_freezing_fog' || precip === 'freezing_drizzle') {
+      if (snowIntensity === 'very_light' || actualPrecip === 'very_light' || window._drizzleIntensity === 'light') {
+        card.classList.add('ok-very-light');
+      } else if (snowIntensity === 'light' || actualPrecip === 'light' || window._drizzleIntensity === 'moderate') {
+        card.classList.add('warn-light');
+      } else {
+        card.classList.add('warn-moderate');
+      }
+    } else {
+      card.classList.add('warn-mod');
+    }
+
+    title.innerHTML = 'HOT (Type I)';
+    let detailsHtml = `Temperature: <b>${oat}°C</b>.<br>`;
+
+    if (intensityLabel) {
+      detailsHtml += `Intensity: <b>${intensityLabel}</b>.<br>Visibility: <b>${vis} m</b>.<br>`;
+      if (precip === 'snow' || precip === 'snow_freezing_fog') {
+        detailsHtml += `Time of day: <b>${timeOfDay === 'day' ? 'Day' : 'Night'}</b>.`;
+      }
+    } else {
+      detailsHtml += `Precipitation: <b>${formatPrecipitationName(actualPrecip)}</b>.`;
+    }
+    details.innerHTML = detailsHtml;
+
+    let selectedMin = null;
+    if (precip === 'snow' || precip === 'snow_freezing_fog') {
+      value.innerHTML = formatSnowRange(range, snowIntensity);
+      if (snowIntensity === 'moderate') selectedMin = range[0];
+      else selectedMin = range[1];
+      setTimerTarget(selectedMin);
+    } else if (precip === 'freezing_drizzle') {
+      value.innerHTML = formatDrizzleRange(range, window._drizzleIntensity);
+      if (window._drizzleIntensity === 'moderate') selectedMin = range[0];
+      else selectedMin = range[1];
+      setTimerTarget(selectedMin);
+    } else {
+      value.innerText = formatRange(range);
+      // Интервал без подсветки → Cockpit / Cabin / запрет
+      if (Array.isArray(range) && range[0] !== range[1]) {
+        setTimerTarget(range[0], range[1]);
+      } else {
+        setTimerTarget(range[1]);
+      }
+    }
+    return;
+  }
+
+  /* TYPE II */
+  if (fluid === 'typeII') {
+    const band = getTypeIIBand(oat);
+    const table = TABLE_TYPE_II[conc];
+
+    if (!table || !table[band]) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type II, ${conc}, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    let range = table[band][actualPrecip];
+    if (!range) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type II, ${conc}, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (precip === 'snow' || precip === 'snow_freezing_fog' || precip === 'freezing_drizzle') {
+      if (snowIntensity === 'very_light' || actualPrecip === 'very_light' || window._drizzleIntensity === 'light') {
+        card.classList.add('ok-very-light');
+      } else if (snowIntensity === 'light' || actualPrecip === 'light' || window._drizzleIntensity === 'moderate') {
+        card.classList.add('warn-light');
+      } else {
+        card.classList.add('warn-moderate');
+      }
+    } else {
+      card.classList.add('warn-mod');
+    }
+
+    title.innerHTML = 'HOT (Type II Generic)';
+    let detailsHtml = `Temperature: <b>${oat}°C</b>.<br>Concentration: <b>${conc}</b>.<br>`;
+
+    if (intensityLabel) {
+      detailsHtml += `Intensity: <b>${intensityLabel}</b>.<br>Visibility: <b>${vis} m</b>.<br>`;
+      if (precip === 'snow' || precip === 'snow_freezing_fog') {
+        detailsHtml += `Time of day: <b>${timeOfDay === 'day' ? 'Day' : 'Night'}</b>.`;
+      }
+    } else {
+      detailsHtml += `Precipitation: <b>${formatPrecipitationName(actualPrecip)}</b>.`;
+    }
+    details.innerHTML = detailsHtml;
+
+    let selectedMin = null;
+    if (precip === 'snow' || precip === 'snow_freezing_fog') {
+      value.innerHTML = formatSnowRange(range, snowIntensity);
+      if (snowIntensity === 'moderate') selectedMin = range[0];
+      else selectedMin = range[1];
+      setTimerTarget(selectedMin);
+    } else if (precip === 'freezing_drizzle') {
+      value.innerHTML = formatDrizzleRange(range, window._drizzleIntensity);
+      if (window._drizzleIntensity === 'moderate') selectedMin = range[0];
+      else selectedMin = range[1];
+      setTimerTarget(selectedMin);
+    } else {
+      value.innerText = formatRange(range);
+      if (Array.isArray(range) && range[0] !== range[1]) {
+        setTimerTarget(range[0], range[1]);
+      } else {
+        setTimerTarget(range[1]);
+      }
+    }
+    return;
+  }
+
+  /* TYPE IV (ALL BRANDS) */
+  if (fluid === 'typeIV') {
+    let tableToUse = null;
+    let brandName = 'Generic';
+
+    if (brand === 'IV') {
+      tableToUse = TABLE_TYPE_IV[conc];
+      brandName = 'Generic';
+    } else if (brand === 'IV_AVIAFLIGHT') {
+      tableToUse = TABLE_TYPE_IV_AVIAFLIGHT[conc];
+      brandName = 'AVIAFLIGHT EG';
+    } else if (brand === 'IV_DEFROST') {
+      tableToUse = TABLE_TYPE_IV_DEFROST[conc];
+      brandName = 'DEFROST ECO 4';
+    } else if (brand === 'IV_GREEN') {
+      tableToUse = TABLE_TYPE_IV_GREEN[conc];
+      brandName = 'GREEN FLO';
+    } else if (brand === 'IV_MIXTURE') {
+      tableToUse = TABLE_TYPE_IV_MIXTURE[conc];
+      brandName = 'AVIAFLIGHT & GREEN FLO Mixture';
+    }
+
+    if (!tableToUse) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type IV, ${brandName}, ${conc}) таблица не предусмотрена.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    const band = getTypeIVBand(oat);
+    if (!tableToUse[band]) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type IV, ${brandName}, ${conc}, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    // Прим. 10: Freezing Drizzle и Light Freezing Rain запрещены ниже -10°C
+    if (oat < -10 && (precip === 'freezing_drizzle' || precip === 'light_freezing_rain')) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type IV, ${brandName}, ${conc}, ${oat}°C) время защитного действия не предусмотрено (Прим. 10).`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    let range = tableToUse[band][actualPrecip];
+    if (!range) {
+      card.classList.add('danger');
+      title.innerHTML = 'НЕТ ДАННЫХ (N/A)';
+      value.innerText = 'N/A';
+      details.innerHTML = `Для данных условий (Type IV, ${brandName}, ${conc}, ${oat}°C) время защитного действия не предусмотрено.`;
+      row.classList.add('full-width');
+      return;
+    }
+
+    if (precip === 'snow' || precip === 'snow_freezing_fog' || precip === 'freezing_drizzle') {
+      if (snowIntensity === 'very_light' || actualPrecip === 'very_light' || window._drizzleIntensity === 'light') {
+        card.classList.add('ok-very-light');
+      } else if (snowIntensity === 'light' || actualPrecip === 'light' || window._drizzleIntensity === 'moderate') {
+        card.classList.add('warn-light');
+      } else {
+        card.classList.add('warn-moderate');
+      }
+    } else {
+      card.classList.add('warn-mod');
+    }
+
+    title.innerHTML = `HOT (Type IV ${brandName})`;
+    let detailsHtml = `Temperature: <b>${oat}°C</b>.<br>Concentration: <b>${conc}</b>.<br>`;
+
+    if (intensityLabel) {
+      detailsHtml += `Intensity: <b>${intensityLabel}</b>.<br>Visibility: <b>${vis} m</b>.<br>`;
+      if (precip === 'snow' || precip === 'snow_freezing_fog') {
+        detailsHtml += `Time of day: <b>${timeOfDay === 'day' ? 'Day' : 'Night'}</b>.`;
+      }
+    } else {
+      detailsHtml += `Precipitation: <b>${formatPrecipitationName(actualPrecip)}</b>.`;
+    }
+    details.innerHTML = detailsHtml;
+
+    let selectedMin = null;
+    if (precip === 'snow' || precip === 'snow_freezing_fog') {
+      // Type IV (табл. 4): без красной подсветки → интервальный таймер
+      value.innerHTML = formatRange(range);
+      if (Array.isArray(range) && range[0] !== range[1]) {
+        setTimerTarget(range[0], range[1]);
+      } else {
+        setTimerTarget(range[0]);
+      }
+    } else if (precip === 'freezing_drizzle') {
+      value.innerHTML = formatDrizzleRange(range, window._drizzleIntensity);
+      if (window._drizzleIntensity === 'moderate') selectedMin = range[0];
+      else selectedMin = range[1];
+      setTimerTarget(selectedMin);
+    } else {
+      value.innerText = formatRange(range);
+      if (Array.isArray(range) && range[0] !== range[1]) {
+        setTimerTarget(range[0], range[1]);
+      } else {
+        setTimerTarget(range[1]);
+      }
+    }
+    return;
+  }
+
+  notReady();
+}
+
+/* TIMER LOGIC */
+let timerInterval = null;
+let timerElapsed = 0;
+let timerStartedAt = 0;
+let timerRunning = false;
+let timerTargetMinutes = 0;
+let timerRangeMin = null; // минуты: нижняя граница интервала (режим без подсветки)
+let timerRangeMax = null; // минуты: верхняя граница интервала
+window._selectedHotMinutes = null;
+
+function formatStopwatch(milliseconds) {
+  const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return [String(hours).padStart(2, '0'), String(minutes).padStart(2, '0'), String(seconds).padStart(2, '0')].join(':');
+}
+
+function isRangeTimerMode() {
+  return timerRangeMin != null && timerRangeMax != null && timerRangeMax > timerRangeMin;
+}
+
+function updateRangeStatus(remainingMs, statusEl) {
+  if (!isRangeTimerMode() || !statusEl) return;
+  const remainingMin = remainingMs / 60000;
+  statusEl.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
+  // Отсчёт от большего значения: пока remaining > меньшего → COCKPIT CHECK
+  // remaining ≤ меньшего (но > 0) → CABIN CHECK
+  // remaining ≤ 0 → запрет взлёта
+  if (remainingMin > timerRangeMin) {
+    statusEl.textContent = 'COCKPIT CHECK';
+    statusEl.classList.add('status-cockpit');
+  } else if (remainingMin > 0) {
+    statusEl.textContent = 'CABIN CHECK';
+    statusEl.classList.add('status-cabin');
+  } else {
+    statusEl.textContent = 'Взлет запрещен, проведите повторную обработку ВС';
+    statusEl.classList.add('status-forbidden');
+  }
+}
+
+function renderStopwatch() {
+  const display = document.getElementById('timerDisplay');
+  const status = document.getElementById('timerStatus');
+
+  if (!timerTargetMinutes) {
+    display.textContent = '00:00:00';
+    display.classList.remove('expired');
+    return;
+  }
+
+  const targetMs = timerTargetMinutes * 60 * 1000;
+  const currentElapsed = timerElapsed + (timerRunning ? Date.now() - timerStartedAt : 0);
+  const remaining = targetMs - currentElapsed;
+
+  if (remaining <= 0) {
+    display.textContent = '00:00:00';
+    display.classList.add('expired');
+    if (!isRangeTimerMode()) {
+      status.textContent = 'EXPIRED';
+    } else {
+      updateRangeStatus(0, status);
+    }
+    if (timerRunning) {
+      timerRunning = false;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerElapsed = targetMs;
+      document.getElementById('timerStartButton').textContent = 'START TIME';
+      document.getElementById('timerStartButton').classList.remove('timer-pause');
+      document.getElementById('timerStartButton').classList.add('timer-start');
+    }
+  } else {
+    display.textContent = formatStopwatch(remaining);
+    display.classList.remove('expired');
+    if (isRangeTimerMode()) {
+      updateRangeStatus(remaining, status);
+    }
+  }
+}
+
+/**
+ * minutes — целевое время (или нижняя граница интервала)
+ * maxMinutes — верхняя граница интервала (режим без красной подсветки)
+ * В режиме интервала отсчёт идёт от верхней границы; статус:
+ *   < min → Cockpit check
+ *   min…max → Cabin check
+ *   > max → Взлет запрещен...
+ */
+function setTimerTarget(minutes, maxMinutes) {
+  window._selectedHotMinutes = minutes;
+  if (Number.isFinite(maxMinutes) && Number.isFinite(minutes) && maxMinutes > minutes) {
+    timerRangeMin = minutes;
+    timerRangeMax = maxMinutes;
+    timerTargetMinutes = maxMinutes;
+  } else {
+    timerRangeMin = null;
+    timerRangeMax = null;
+    timerTargetMinutes = minutes;
+  }
+  document.getElementById('timerCard').classList.add('active');
+  const unitEl = document.getElementById('hotUnit');
+  if (unitEl) {
+    if (isRangeTimerMode()) {
+      unitEl.textContent = formatTimeLabel(timerRangeMin) + ' – ' + formatTimeLabel(timerRangeMax);
+    } else {
+      unitEl.textContent = Number.isFinite(minutes) ? formatTimeLabel(minutes) : '';
+    }
+  }
+  resetStopwatchDisplay();
+}
+
+function resetStopwatchDisplay() {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+  timerElapsed = 0;
+  timerStartedAt = 0;
+  timerRunning = false;
+
+  const display = document.getElementById('timerDisplay');
+  const status = document.getElementById('timerStatus');
+  const btn = document.getElementById('timerStartButton');
+
+  display.classList.remove('expired');
+  status.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
+
+  if (timerTargetMinutes) {
+    display.textContent = formatStopwatch(timerTargetMinutes * 60 * 1000);
+    if (isRangeTimerMode()) {
+      status.textContent = 'Cockpit check';
+      status.classList.add('status-cockpit');
+    } else {
+      status.textContent = 'READY';
+    }
+  } else {
+    display.textContent = '00:00:00';
+    status.textContent = 'READY';
+  }
+
+  btn.textContent = 'START TIME';
+  btn.classList.remove('timer-pause');
+  btn.classList.add('timer-start');
+}
+
+function startPauseStopwatch() {
+  if (!timerTargetMinutes) return;
+
+  const button = document.getElementById('timerStartButton');
+  const status = document.getElementById('timerStatus');
+
+  if (!timerRunning) {
+    timerStartedAt = Date.now();
+    timerRunning = true;
+    button.textContent = 'PAUSE';
+    button.classList.remove('timer-start');
+    button.classList.add('timer-pause');
+    if (!isRangeTimerMode()) status.textContent = 'RUNNING';
+    renderStopwatch();
+    timerInterval = setInterval(renderStopwatch, 200);
+  } else {
+    timerElapsed += Date.now() - timerStartedAt;
+    timerRunning = false;
+    clearInterval(timerInterval);
+    timerInterval = null;
+    button.textContent = 'RESUME';
+    button.classList.remove('timer-pause');
+    button.classList.add('timer-start');
+    if (!isRangeTimerMode()) status.textContent = 'PAUSED';
+    else renderStopwatch();
+    renderStopwatch();
+  }
+}
+
+function resetStopwatch() {
+  resetStopwatchDisplay();
+}
+
+/* INIT */
+window.addEventListener('DOMContentLoaded', () => {
+  clearNumberInputOnFocus(document.getElementById('oat'));
+  clearNumberInputOnFocus(document.getElementById('vis'));
+  document.getElementById('timerStartButton').addEventListener('click', startPauseStopwatch);
+  document.getElementById('timerResetButton').addEventListener('click', resetStopwatch);
+  updateControls();
+});
 
   </script>
 </body>
