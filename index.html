@@ -3602,14 +3602,41 @@ let lastRangeStatus = null;
 let timerAudioContext = null;
 window._selectedHotMinutes = null;
 
-// Короткие звуковые сигналы при смене статуса. AudioContext запускается
-// после нажатия START TIME, чтобы Safari на iPhone разрешил воспроизведение.
+// AudioContext на iPhone/Safari должен быть создан и разблокирован
+// непосредственно в обработчике пользовательского действия.
 function ensureTimerAudio() {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return null;
-  if (!timerAudioContext) timerAudioContext = new AudioContextClass();
-  if (timerAudioContext.state === 'suspended') timerAudioContext.resume().catch(() => {});
+  if (!timerAudioContext) {
+    try {
+      timerAudioContext = new AudioContextClass();
+    } catch (error) {
+      return null;
+    }
+  }
+  if (timerAudioContext.state === 'suspended') {
+    try {
+      const resumePromise = timerAudioContext.resume();
+      if (resumePromise && typeof resumePromise.catch === 'function') resumePromise.catch(() => {});
+    } catch (error) {}
+  }
   return timerAudioContext;
+}
+
+// Вызывать синхронно при касании поля времени — это жест пользователя,
+// который позволяет Safari разрешить последующие сигналы таймера.
+function unlockTimerAudio() {
+  const ctx = ensureTimerAudio();
+  if (!ctx) return;
+  try {
+    const oscillator = ctx.createOscillator();
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.00001, ctx.currentTime);
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.015);
+  } catch (error) {}
 }
 
 function playStatusChime(status) {
@@ -3621,20 +3648,34 @@ function playStatusChime(status) {
     cabin:     [{ frequency: 660, delay: 0, duration: 0.11 }, { frequency: 660, delay: 0.19, duration: 0.11 }],
     forbidden: [{ frequency: 440, delay: 0, duration: 0.16 }, { frequency: 440, delay: 0.23, duration: 0.16 }, { frequency: 330, delay: 0.46, duration: 0.22 }]
   };
-  (patterns[status] || []).forEach(({ frequency, delay, duration }) => {
-    const startAt = ctx.currentTime + delay;
-    const oscillator = ctx.createOscillator();
-    const gain = ctx.createGain();
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(frequency, startAt);
-    gain.gain.setValueAtTime(0.0001, startAt);
-    gain.gain.exponentialRampToValueAtTime(0.12, startAt + 0.015);
-    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
-    oscillator.connect(gain);
-    gain.connect(ctx.destination);
-    oscillator.start(startAt);
-    oscillator.stop(startAt + duration + 0.02);
-  });
+
+  const play = () => {
+    if (ctx.state !== 'running') return;
+    (patterns[status] || []).forEach(({ frequency, delay, duration }) => {
+      const startAt = ctx.currentTime + delay;
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, startAt);
+      gain.gain.setValueAtTime(0.0001, startAt);
+      gain.gain.exponentialRampToValueAtTime(0.12, startAt + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+      oscillator.start(startAt);
+      oscillator.stop(startAt + duration + 0.02);
+    });
+  };
+
+  // Если iOS приостановил аудио, сначала ждём resume и только потом
+  // планируем сигналы — иначе они могли уходить в suspended-контекст.
+  if (ctx.state === 'running') {
+    play();
+  } else {
+    try {
+      ctx.resume().then(play).catch(() => {});
+    } catch (error) {}
+  }
 }
 
 function formatStopwatch(milliseconds) {
@@ -3872,6 +3913,10 @@ window.addEventListener('DOMContentLoaded', () => {
   clearNumberInputOnFocus(document.getElementById('vis'));
   const processingTimeInput = document.getElementById('processingStartTime');
   processingTimeInput.value = getLocalClockTime();
+  // Разблокируем звук в момент прямого касания/нажатия пользователя.
+  ['pointerdown', 'touchstart', 'mousedown', 'click', 'keydown', 'focus'].forEach(eventName => {
+    processingTimeInput.addEventListener(eventName, unlockTimerAudio, { passive: true });
+  });
   processingTimeInput.addEventListener('change', startAutomaticTimer);
   document.getElementById('timerResetButton').addEventListener('click', resetStopwatch);
   setInterval(refreshUnconfirmedClock, 1000);
