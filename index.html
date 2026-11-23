@@ -124,7 +124,7 @@
       margin-top: 6px;
       font-size: 0.62rem;
       letter-spacing: 4px;
-      color: #93c5fd;
+      color: #ffffff;
       text-transform: uppercase;
       font-weight: 600;
     }
@@ -815,38 +815,155 @@
     }
     #main-hot .timer-card {
       display: none;
-      width: 132px;
-      flex: 0 0 132px;
-      background: #1e293b;
-      border: 1.5px solid #334155;
-      border-radius: 16px;
-      padding: 12px 10px;
+      width: 164px;
+      flex: 0 0 164px;
+      box-sizing: border-box;
+      min-width: 0;
+      background: #111c2e;
+      border: 1.5px solid #3b4b63;
+      border-radius: 17px;
+      padding: 10px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 0;
       text-align: center;
+      box-shadow: 0 5px 16px rgba(0,0,0,.22);
     }
     #main-hot .timer-card.active { display: flex; }
+    #main-hot .timer-time-entry {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 9px 7px 11px;
+      border: 1.5px solid rgba(59,130,246,.55);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(37,99,235,.18), rgba(15,23,42,.92));
+    }
     #main-hot .timer-title {
-      font-size: 0.65rem;
+      margin-bottom: 7px;
+      font-size: 0.66rem;
       font-weight: 800;
       color: #93c5fd;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: .7px;
+      line-height: 1.35;
+    }
+    #main-hot .processing-time-input {
+      display: block;
+      width: 148px;
+      max-width: 100%;
+      min-width: 0;
+      align-self: center;
+      margin: 0 auto;
+      box-sizing: border-box;
+      padding: 8px 6px;
+      overflow: hidden;
+      border: 2px solid #2563eb;
+      border-radius: 9px;
+      background: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-align: center;
+      text-align-last: center;
+      color-scheme: dark;
+      font-variant-numeric: tabular-nums;
+    }
+    /* Центрируем отображаемые часы и минуты внутри нативного поля iOS/Safari */
+    #main-hot .processing-time-input::-webkit-date-and-time-value {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      text-align: center;
+      margin: 0 auto;
+    }
+    #main-hot .processing-time-input::-webkit-datetime-edit {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0 auto;
+    }
+    #main-hot .processing-time-input::-webkit-datetime-edit-fields-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0 auto;
+    }
+    #main-hot .processing-time-input::-webkit-calendar-picker-indicator {
+      margin: 0;
+      padding: 0;
+    }
+    #main-hot .processing-time-input {
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    #main-hot .timer-readout {
+      display: none;
+      margin-top: 0;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 12px 4px 10px;
+      border: 1.5px solid #475569;
+      border-radius: 13px;
+      background: linear-gradient(145deg, #071b35 0%, #07111f 55%, #101b32 100%);
+      border-color: #38bdf8;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,.45), 0 0 12px rgba(14,165,233,.22);
+    }
+    #main-hot .timer-readout.active { display: block; }
+    #main-hot .timer-readout-label {
+      margin: 0;
+      text-align: left;
+      color: #7dd3fc;
+      text-shadow: 0 0 8px rgba(56,189,248,.35);
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+    }
+    #main-hot .processing-time-input.time-confirmed {
+      border-color: #16a34a;
+      background: rgba(22, 163, 74, 0.18);
+      color: #4ade80;
+      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.2);
     }
     #main-hot .timer-display {
-      font-size: 1.45rem;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      font-size: clamp(1.35rem, 5.5vw, 2rem);
       font-weight: 900;
-      color: #22c55e;
+      color: #f8fafc;
+      text-shadow: 0 0 10px rgba(56,189,248,.55), 0 0 20px rgba(34,211,238,.25);
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
-      letter-spacing: -0.5px;
+      letter-spacing: -1.2px;
+      line-height: 1.2;
+      overflow: hidden;
       transition: color 0.3s;
     }
-    #main-hot .timer-display.expired { color: #ef4444; }
+    #main-hot .timer-display.status-cockpit { color: #4ade80; text-shadow: 0 0 10px rgba(74,222,128,.55), 0 0 20px rgba(34,197,94,.3); }
+    #main-hot .timer-display.status-cabin { color: #fbbf24; text-shadow: 0 0 10px rgba(251,191,36,.55), 0 0 20px rgba(245,158,11,.3); }
+    #main-hot .timer-display.status-forbidden,
+    #main-hot .timer-display.expired { color: #fb7185; text-shadow: 0 0 10px rgba(251,113,133,.6), 0 0 20px rgba(239,68,68,.35); }
     #main-hot .timer-status {
+      display: none;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      margin-top: 0;
+      margin-bottom: 8px;
+      justify-content: flex-end;
+      text-align: right;
       font-size: 0.62rem;
       color: #94a3b8;
       min-height: 28px;
@@ -862,6 +979,18 @@
       justify-content: center;
       text-align: center;
       box-sizing: border-box;
+    }
+    #main-hot .timer-status.active {
+      display: flex;
+    }
+    #main-hot .timer-status.status-entry {
+      display: flex;
+      color: #e2e8f0;
+      font-weight: 800;
+      border-color: #64748b;
+      background: rgba(100, 116, 139, 0.16);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.16);
+      font-size: 0.58rem;
     }
     #main-hot .timer-status.status-cockpit {
       color: #22c55e;
@@ -889,16 +1018,23 @@
     }
     #main-hot .timer-buttons {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 7px;
     }
     #main-hot .timer-button {
-      width: 100%;
+      width: auto;
+      max-width: 100%;
+      align-self: center;
+      white-space: nowrap;
       border: none;
       border-radius: 10px;
-      padding: 10px 4px;
-      font-size: 0.68rem;
+      padding: 8px 9px;
+      font-size: 0.61rem;
       font-weight: 800;
       cursor: pointer;
       text-transform: uppercase;
@@ -912,25 +1048,265 @@
     @media (max-width: 380px) {
       #main-hot .results-row { flex-wrap: wrap; }
       #main-hot .result-card { flex-basis: 100%; }
-      #main-hot .timer-card {
-        width: 100%;
-        flex-basis: 100%;
-      }
       #main-hot .timer-card.active {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        padding: 14px;
+        display: flex;
+        gap: 0;
+        padding: 12px;
       }
-      #main-hot .timer-title,
-      #main-hot .timer-status { grid-column: 1 / -1; }
+      #main-hot .timer-display { font-size: 2.25rem; }
+      #main-hot .timer-buttons { flex-direction: row; }
+    }
+
+    /* Защита таймера от переполнения при повороте экрана */
+    #main-hot .results-row,
+    #main-hot .timer-card,
+    #main-hot .timer-readout,
+    #main-hot .timer-buttons {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    #main-hot .timer-card {
+      overflow: hidden;
+    }
+    #main-hot .timer-readout {
+      padding-left: 3px;
+      padding-right: 3px;
+      overflow: hidden;
+    }
+    #main-hot .timer-display {
+      font-size: clamp(0.95rem, 5.2vw, 1.45rem);
+      letter-spacing: -0.7px;
+      line-height: 1.15;
+      overflow-wrap: normal;
+    }
+    #main-hot .timer-readout-label {
+      text-align: center;
+      letter-spacing: 0.7px;
+      overflow-wrap: anywhere;
+    }
+    #main-hot .timer-status {
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      padding-left: 2px;
+      padding-right: 2px;
+      font-size: 0.56rem;
+      letter-spacing: 0;
+    }
+    #main-hot .timer-buttons {
+      width: 100%;
+    }
+    #main-hot .timer-button {
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    @media (orientation: landscape) and (max-height: 500px) {
+      #main-hot .timer-display { font-size: clamp(0.9rem, 3.4vw, 1.3rem); }
+      #main-hot .timer-card { padding: 7px; }
+      #main-hot .timer-readout { padding-top: 8px; padding-bottom: 7px; }
+    }
+
+    /* Premium aviation-instrument styling for the HOT timer panel */
+    #main-hot .timer-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      gap: 8px;
+      padding: 12px 10px;
+      border: 1px solid rgba(96, 165, 250, .62);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 50% -18%, rgba(56,189,248,.30), transparent 58%),
+        radial-gradient(ellipse at 100% 100%, rgba(37,99,235,.18), transparent 52%),
+        linear-gradient(155deg, #142b49 0%, #0b1b31 48%, #080f1e 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        inset 0 -12px 24px rgba(0,0,0,.28),
+        0 7px 22px rgba(0,0,0,.32),
+        0 0 0 1px rgba(56,189,248,.10),
+        0 0 18px rgba(14,165,233,.18);
+    }
+    #main-hot .timer-card::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 13%;
+      width: 74%;
+      height: 2px;
+      border-radius: 0 0 10px 10px;
+      background: linear-gradient(90deg, transparent, #7dd3fc 28%, #e0f2fe 50%, #38bdf8 72%, transparent);
+      box-shadow: 0 0 10px rgba(56,189,248,.75);
+    }
+    #main-hot .timer-card::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 5px;
+      border: 1px solid rgba(148, 190, 226, .10);
+      border-radius: 13px;
+      pointer-events: none;
+    }
+    #main-hot .timer-time-entry {
+      position: relative;
+      border: 1px solid rgba(96,165,250,.72);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(59,130,246,.28), transparent 75%),
+        linear-gradient(145deg, rgba(30,64,115,.58), rgba(7,20,39,.92));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 0 14px rgba(37,99,235,.16);
+    }
+    #main-hot .timer-title {
+      color: #bfdbfe;
+      text-shadow: 0 0 10px rgba(96,165,250,.32);
+      letter-spacing: .65px;
+    }
+    #main-hot .processing-time-input {
+      border-color: rgba(96,165,250,.95);
+      background: linear-gradient(180deg, rgba(30,64,175,.38), rgba(15,23,42,.82));
+      box-shadow: inset 0 2px 7px rgba(0,0,0,.28), 0 0 12px rgba(59,130,246,.20);
+    }
+    #main-hot .timer-readout {
+      position: relative;
+      border-color: rgba(56,189,248,.82);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(14,116,144,.24), transparent 75%),
+        linear-gradient(160deg, #071b35 0%, #061222 58%, #0c1d35 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 3px 12px rgba(0,0,0,.48),
+        0 0 14px rgba(14,165,233,.20);
+    }
+    #main-hot .timer-readout-label {
+      text-shadow: 0 0 10px rgba(56,189,248,.55);
+    }
+    #main-hot .timer-status {
+      border-color: rgba(125,211,252,.35);
+      background: linear-gradient(100deg, rgba(15,35,59,.96), rgba(20,48,76,.88));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.07), 0 0 10px rgba(56,189,248,.10);
+    }
+    #main-hot .timer-button {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.20), 0 3px 8px rgba(0,0,0,.25);
+    }
+
+    /* Landscape: give the HOT timer more horizontal room */
+    @media (orientation: landscape) and (max-height: 600px) and (min-width: 500px) {
+      #main-hot .results-row {
+        gap: 12px;
+      }
+      #main-hot .result-card {
+        flex: 1 1 0;
+        min-width: 0;
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+      #main-hot .timer-card {
+        width: 208px;
+        flex: 0 0 208px;
+        padding: 12px 13px;
+      }
+      #main-hot .timer-readout,
+      #main-hot .timer-time-entry {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        align-self: stretch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #main-hot .timer-time-entry {
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+      #main-hot .timer-title {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-align: center;
+        font-size: clamp(.52rem, 1.35vw, .66rem);
+      }
       #main-hot .timer-display {
-        grid-column: 1 / -1;
-        font-size: 1.6rem;
+        font-size: clamp(1.15rem, 3.7vw, 1.55rem);
+        letter-spacing: -0.35px;
       }
+      #main-hot .processing-time-input {
+        display: block;
+        width: 100%;
+        inline-size: 100%;
+        min-width: 0;
+        max-width: 100%;
+        align-self: stretch;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Final landscape containment fix: keep the time-entry cell and native iOS time control inside the timer panel */
+    @media (orientation: landscape) and (max-height: 600px) and (min-width: 500px) {
+      #main-hot .results-row {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        align-items: stretch;
+      }
+      #main-hot .result-card {
+        flex: 1 1 0%;
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      #main-hot .timer-card {
+        flex: 0 0 208px;
+        width: 208px;
+        min-width: 0;
+        max-width: 208px;
+        box-sizing: border-box;
+        align-items: stretch;
+      }
+      #main-hot .timer-card > *,
+      #main-hot .timer-time-entry,
+      #main-hot .timer-readout,
       #main-hot .timer-buttons {
-        flex-direction: row;
-        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+      #main-hot .timer-time-entry {
+        display: flex;
+        flex: 0 1 auto;
+        align-items: center;
+        overflow: hidden;
+      }
+      #main-hot .timer-title {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
+      #main-hot .processing-time-input {
+        display: block;
+        flex: 0 1 100%;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        inline-size: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        text-align: center;
+        -webkit-appearance: none;
+        appearance: none;
       }
     }
 
@@ -1296,12 +1672,17 @@
           <div id="noteBox" class="note-box" style="display:none;"></div>
         </div>
         <div class="timer-card" id="timerCard">
-          <div class="timer-status" id="timerStatus">READY</div>
-          <div class="timer-title">HOLDOVER TIMER</div>
-          <div class="timer-display" id="timerDisplay">00:00:00</div>
-          <div class="timer-buttons">
-            <button type="button" class="timer-button timer-start" id="timerStartButton">START TIME</button>
-            <button type="button" class="timer-button timer-reset" id="timerResetButton">RESET</button>
+          <div class="timer-status" id="timerStatus" style="display:none"></div>
+          <div class="timer-time-entry" id="processingTimeEntry" style="display:none">
+            <div class="timer-title">ВВЕДИТЕ ВРЕМЯ НАЧАЛА ОБРАБОТКИ</div>
+            <input type="time" id="processingStartTime" class="processing-time-input" aria-label="Время начала обработки">
+          </div>
+          <div class="timer-readout" id="timerReadout">
+            <div class="timer-readout-label">ОСТАЛОСЬ HOT</div>
+            <div class="timer-display" id="timerDisplay">00:00:00</div>
+          </div>
+          <div class="timer-buttons" style="margin-top:10px">
+            <button type="button" class="timer-button timer-reset" id="timerResetButton">СБРОСИТЬ ВРЕМЯ</button>
           </div>
         </div>
       </div>
@@ -2806,6 +3187,8 @@ function calculate() {
   timerRangeMax = null;
   resetStopwatchDisplay();
   timerCard.classList.remove('active');
+  const processingTimeEntry = document.getElementById('processingTimeEntry');
+  if (processingTimeEntry) processingTimeEntry.style.display = 'none';
   row.classList.remove('full-width');
 
   card.className = 'result-card';
@@ -3210,6 +3593,8 @@ let timerInterval = null;
 let timerElapsed = 0;
 let timerStartedAt = 0;
 let timerRunning = false;
+let processingStartTimestamp = null;
+let processingTimeConfirmed = false;
 let timerTargetMinutes = 0;
 let timerRangeMin = null; // минуты: нижняя граница интервала (режим без подсветки)
 let timerRangeMax = null; // минуты: верхняя граница интервала
@@ -3273,20 +3658,25 @@ function updateRangeStatus(remainingMs, statusEl) {
   // Прошло больше max → запрет взлёта.
   const elapsedMin = (timerRangeMax * 60000 - remainingMs) / 60000;
   statusEl.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
+  const displayEl = document.getElementById('timerDisplay');
+  if (displayEl) displayEl.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
   let nextStatus;
 
   if (elapsedMin < timerRangeMin) {
     nextStatus = 'cockpit';
     statusEl.textContent = 'COCPIT CHECK';
     statusEl.classList.add('status-cockpit');
+    if (displayEl) displayEl.classList.add('status-cockpit');
   } else if (elapsedMin <= timerRangeMax) {
     nextStatus = 'cabin';
     statusEl.textContent = 'CABIN CHECK';
     statusEl.classList.add('status-cabin');
+    if (displayEl) displayEl.classList.add('status-cabin');
   } else {
     nextStatus = 'forbidden';
     statusEl.textContent = 'Взлет запрещен, проведите повторную обработку ВС';
     statusEl.classList.add('status-forbidden');
+    if (displayEl) displayEl.classList.add('status-forbidden');
   }
 
   // Не подаём сигнал при первоначальном отображении, только при переходе.
@@ -3307,7 +3697,9 @@ function renderStopwatch() {
   }
 
   const targetMs = timerTargetMinutes * 60 * 1000;
-  const currentElapsed = timerElapsed + (timerRunning ? Date.now() - timerStartedAt : 0);
+  const currentElapsed = processingStartTimestamp !== null
+    ? Math.max(0, Date.now() - processingStartTimestamp)
+    : 0;
   const remaining = targetMs - currentElapsed;
 
   if (remaining <= 0) {
@@ -3318,18 +3710,16 @@ function renderStopwatch() {
     status.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
     status.textContent = 'Взлет запрещен, проведите повторную обработку ВС';
     status.classList.add('status-forbidden');
+    display.classList.remove('status-cockpit', 'status-cabin');
+    display.classList.add('status-forbidden');
     if (lastRangeStatus !== 'forbidden') {
       playStatusChime('forbidden');
       lastRangeStatus = 'forbidden';
     }
-    if (timerRunning) {
-      timerRunning = false;
+    timerRunning = false;
+    if (timerInterval !== null) {
       clearInterval(timerInterval);
       timerInterval = null;
-      timerElapsed = targetMs;
-      document.getElementById('timerStartButton').textContent = 'START TIME';
-      document.getElementById('timerStartButton').classList.remove('timer-pause');
-      document.getElementById('timerStartButton').classList.add('timer-start');
     }
   } else {
     display.textContent = formatStopwatch(remaining);
@@ -3350,6 +3740,12 @@ function renderStopwatch() {
  */
 function setTimerTarget(minutes, maxMinutes) {
   window._selectedHotMinutes = minutes;
+  const processingTimeEntry = document.getElementById('processingTimeEntry');
+  if (processingTimeEntry && Number.isFinite(minutes) && minutes > 0) {
+    processingTimeEntry.style.display = 'flex';
+    const timerCard = document.getElementById('timerCard');
+    if (timerCard) timerCard.classList.add('active');
+  }
   if (Number.isFinite(maxMinutes) && Number.isFinite(minutes) && maxMinutes > minutes) {
     timerRangeMin = minutes;
     timerRangeMax = maxMinutes;
@@ -3359,7 +3755,6 @@ function setTimerTarget(minutes, maxMinutes) {
     timerRangeMax = null;
     timerTargetMinutes = minutes;
   }
-  document.getElementById('timerCard').classList.add('active');
   const unitEl = document.getElementById('hotUnit');
   if (unitEl) {
     if (isRangeTimerMode()) {
@@ -3371,6 +3766,18 @@ function setTimerTarget(minutes, maxMinutes) {
   resetStopwatchDisplay();
 }
 
+function getLocalClockTime() {
+  const now = new Date();
+  return String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+}
+
+function refreshUnconfirmedClock() {
+  const timeInput = document.getElementById('processingStartTime');
+  if (timeInput && !processingTimeConfirmed && document.activeElement !== timeInput) {
+    timeInput.value = getLocalClockTime();
+  }
+}
+
 function resetStopwatchDisplay() {
   if (timerInterval !== null) {
     clearInterval(timerInterval);
@@ -3379,62 +3786,80 @@ function resetStopwatchDisplay() {
   timerElapsed = 0;
   timerStartedAt = 0;
   timerRunning = false;
+  processingStartTimestamp = null;
 
   const display = document.getElementById('timerDisplay');
   const status = document.getElementById('timerStatus');
-  const btn = document.getElementById('timerStartButton');
+  const timeInput = document.getElementById('processingStartTime');
 
-  display.classList.remove('expired');
+  display.classList.remove('expired', 'status-cockpit', 'status-cabin', 'status-forbidden');
   status.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden');
   lastRangeStatus = null;
-
-  if (timerTargetMinutes) {
-    display.textContent = formatStopwatch(timerTargetMinutes * 60 * 1000);
-    if (isRangeTimerMode()) {
-      status.textContent = 'COCPIT CHECK';
-      status.classList.add('status-cockpit');
-      lastRangeStatus = 'cockpit';
-    } else {
-      status.textContent = 'READY';
-    }
-  } else {
-    display.textContent = '00:00:00';
-    status.textContent = 'READY';
+  processingTimeConfirmed = false;
+  if (timeInput) {
+    timeInput.classList.remove('time-confirmed');
+    timeInput.value = getLocalClockTime();
+  }
+  const timerCard = document.getElementById('timerCard');
+  const processingTimeEntry = document.getElementById('processingTimeEntry');
+  const timerReadout = document.getElementById('timerReadout');
+  const hasTarget = Number.isFinite(timerTargetMinutes) && timerTargetMinutes > 0;
+  if (timerCard) timerCard.classList.toggle('active', hasTarget);
+  if (processingTimeEntry) processingTimeEntry.style.display = hasTarget ? 'flex' : 'none';
+  if (timerReadout) timerReadout.classList.remove('active');
+  if (status) {
+    status.classList.remove('active', 'status-cockpit', 'status-cabin', 'status-forbidden');
+    status.classList.add('status-entry');
+    status.textContent = '';
+    status.style.display = hasTarget ? 'flex' : 'none';
   }
 
-  btn.textContent = 'START TIME';
-  btn.classList.remove('timer-pause');
-  btn.classList.add('timer-start');
+  display.textContent = timerTargetMinutes
+    ? formatStopwatch(timerTargetMinutes * 60 * 1000)
+    : '00:00:00';
+  // До подтверждения времени не показываем текстовые статусы.
+  if (status) {
+    status.textContent = '';
+    status.classList.remove('status-cockpit', 'status-cabin', 'status-forbidden', 'active');
+    status.classList.remove('status-entry');
+    status.textContent = '';
+    status.style.display = 'none';
+  }
 }
 
-function startPauseStopwatch() {
-  if (!timerTargetMinutes) return;
+function startAutomaticTimer() {
+  const timeInput = document.getElementById('processingStartTime');
+  if (!timeInput || !timeInput.value || !timerTargetMinutes) return;
   ensureTimerAudio();
-
-  const button = document.getElementById('timerStartButton');
-  const status = document.getElementById('timerStatus');
-
-  if (!timerRunning) {
-    timerStartedAt = Date.now();
-    timerRunning = true;
-    button.textContent = 'PAUSE';
-    button.classList.remove('timer-start');
-    button.classList.add('timer-pause');
-    if (!isRangeTimerMode()) status.textContent = 'RUNNING';
-    renderStopwatch();
-    timerInterval = setInterval(renderStopwatch, 200);
-  } else {
-    timerElapsed += Date.now() - timerStartedAt;
-    timerRunning = false;
-    clearInterval(timerInterval);
-    timerInterval = null;
-    button.textContent = 'RESUME';
-    button.classList.remove('timer-pause');
-    button.classList.add('timer-start');
-    if (!isRangeTimerMode()) status.textContent = 'PAUSED';
-    else renderStopwatch();
-    renderStopwatch();
+  processingTimeConfirmed = true;
+  timeInput.classList.add('time-confirmed');
+  const processingTimeEntry = document.getElementById('processingTimeEntry');
+  if (processingTimeEntry) processingTimeEntry.style.display = 'none';
+  const timerCard = document.getElementById('timerCard');
+  if (timerCard) timerCard.classList.add('active');
+  const timerReadout = document.getElementById('timerReadout');
+  if (timerReadout) timerReadout.classList.add('active');
+  const timerStatus = document.getElementById('timerStatus');
+  if (timerStatus) {
+    timerStatus.classList.remove('status-entry');
+    timerStatus.classList.add('active');
+    timerStatus.style.display = 'flex';
   }
+
+  const [hours, minutes] = timeInput.value.split(':').map(Number);
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes, 0, 0);
+  // Если время впереди более чем на 12 часов, это переход через полночь и предыдущие сутки.
+  if (start.getTime() - now.getTime() > 12 * 60 * 60 * 1000) start.setDate(start.getDate() - 1);
+  processingStartTimestamp = start.getTime();
+  timerRunning = true;
+  lastRangeStatus = null;
+  if (!isRangeTimerMode()) {
+    document.getElementById('timerStatus').textContent = processingStartTimestamp > Date.now() ? 'WAITING FOR START TIME' : 'RUNNING';
+  }
+  if (timerInterval !== null) clearInterval(timerInterval);
+  renderStopwatch();
+  timerInterval = setInterval(renderStopwatch, 250);
 }
 
 function resetStopwatch() {
@@ -3445,8 +3870,11 @@ function resetStopwatch() {
 window.addEventListener('DOMContentLoaded', () => {
   clearNumberInputOnFocus(document.getElementById('oat'));
   clearNumberInputOnFocus(document.getElementById('vis'));
-  document.getElementById('timerStartButton').addEventListener('click', startPauseStopwatch);
+  const processingTimeInput = document.getElementById('processingStartTime');
+  processingTimeInput.value = getLocalClockTime();
+  processingTimeInput.addEventListener('change', startAutomaticTimer);
   document.getElementById('timerResetButton').addEventListener('click', resetStopwatch);
+  setInterval(refreshUnconfirmedClock, 1000);
   updateControls();
 });
 
